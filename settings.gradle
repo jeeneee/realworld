@@ -1,0 +1,3 @@
+rootProject.name = 'realworld'
+include 'realworld-api', 'realworld-common', 'realworld-core'
+
