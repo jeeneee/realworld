@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TokenProvider {
 
-    private static final String HEADER_PREFIX = "Token ";
+    public static final String HEADER_PREFIX = "Token ";
 
     @Value("${jwt.secret-key}")
     private String key;

@@ -27,7 +27,7 @@ public class LoginUserMethodArgumentResolver implements HandlerMethodArgumentRes
 
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
-        NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+        NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String token = (String) Objects.requireNonNull(authentication.getCredentials(), "No token");
         String email = (String) Objects.requireNonNull(authentication.getPrincipal(), "No email");
