@@ -154,7 +154,7 @@ class UserServiceTest {
         assertThat(response.getToken()).isEqualTo("abc.def.ghi");
     }
 
-    @DisplayName("회원 정보 수정 - 이미 존재하는 유저명인 경우 예외 발생")
+    @DisplayName("개인 정보 수정 - 이미 존재하는 유저명인 경우 예외 발생")
     @Test
     void update_UsernameExist_ExceptionThrown() {
         UpdateRequest request = UpdateRequest.builder()
@@ -166,7 +166,7 @@ class UserServiceTest {
             .isInstanceOf(DuplicateUsernameException.class);
     }
 
-    @DisplayName("회원 정보 수정 - 이미 존재하는 이메일인 경우 예외 발생")
+    @DisplayName("개인 정보 수정 - 이미 존재하는 이메일인 경우 예외 발생")
     @Test
     void update_EmailExist_ExceptionThrown() {
         UpdateRequest request = UpdateRequest.builder()
@@ -180,7 +180,7 @@ class UserServiceTest {
             .isInstanceOf(DuplicateEmailException.class);
     }
 
-    @DisplayName("회원 정보 수정")
+    @DisplayName("개인 정보 수정")
     @Test
     void update_Normal_Success() {
         UpdateRequest request = UpdateRequest.builder()

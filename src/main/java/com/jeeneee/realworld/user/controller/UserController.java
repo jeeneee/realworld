@@ -7,6 +7,7 @@ import com.jeeneee.realworld.user.dto.RegisterRequest;
 import com.jeeneee.realworld.user.dto.UpdateRequest;
 import com.jeeneee.realworld.user.dto.UserResponse;
 import com.jeeneee.realworld.user.service.UserService;
+import java.net.URI;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,8 @@ public class UserController {
 
     @PostMapping("/api/users")
     public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterRequest request) {
-        return ResponseEntity.ok().body(userService.register(request));
+        return ResponseEntity.created(URI.create("/api/profiles/" + request.getUsername()))
+            .body(userService.register(request));
     }
 
     @PostMapping("/api/users/login")
