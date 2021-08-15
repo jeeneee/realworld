@@ -86,19 +86,23 @@ Users of the API should not create URIs themselves, instead they should use the 
 
 ==== 요청 필드
 
-include::{snippets}/user-register/request-fields.adoc[]
+include::{snippets}/user/register/request-fields.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/user/register/response-fields.adoc[]
 
 ==== 요청 예시
 
-include::{snippets}/user-register/http-request.adoc[]
+include::{snippets}/user/register/http-request.adoc[]
 
 ==== 응답 예시
 
-include::{snippets}/user-register/http-response.adoc[]
+include::{snippets}/user/register/http-response.adoc[]
 
 ==== CURL 요청 예시
 
-include::{snippets}/user-register/curl-request.adoc[]
+include::{snippets}/user/register/curl-request.adoc[]
 
 [[user-login]]
 === 로그인
@@ -110,43 +114,170 @@ include::{snippets}/user-register/curl-request.adoc[]
 
 ==== 요청 필드
 
-include::{snippets}/user-login/request-fields.adoc[]
+include::{snippets}/user/login/request-fields.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/user/login/response-fields.adoc[]
 
 ==== 요청 예시
 
-include::{snippets}/user-login/http-request.adoc[]
+include::{snippets}/user/login/http-request.adoc[]
 
 ==== 응답 예시
 
-include::{snippets}/user-login/http-response.adoc[]
+include::{snippets}/user/login/http-response.adoc[]
 
 ==== CURL 요청 예시
 
-include::{snippets}/user-login/curl-request.adoc[]
+include::{snippets}/user/login/curl-request.adoc[]
+
+[[user-find-my-info]]
+=== 개인 정보 조회
+
+==== GET /api/user
+
+이메일, 비밀번호로 로그인 할 수 있다.
+로그인에 성공한 경우, 토큰을 발행하고 해당 회원 정보를 응답한다.
+
+==== 요청 헤더
+
+include::{snippets}/user/find-my-info/request-headers.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/user/find-my-info/response-fields.adoc[]
+
+==== 요청 예시
+
+include::{snippets}/user/find-my-info/http-request.adoc[]
+
+==== 응답 예시
+
+include::{snippets}/user/find-my-info/http-response.adoc[]
+
+==== CURL 요청 예시
+
+include::{snippets}/user/find-my-info/curl-request.adoc[]
 
 [[user-update]]
 === 개인 정보 수정
 
 ==== PUT /api/user
 
-Authorization 헤더에 회원의 토큰을 담아서 수정할 회원 정보를 요청하면 해당 회원의 개인 정보를 수정한다.
+수정할 회원 정보를 요청하면 해당 회원의 개인 정보를 수정한다.
+
 [NOTE]
 ====
 모든 필드는 필수가 아님에 유의한다.
 ====
 
+==== 요청 헤더
+
+include::{snippets}/user/update/request-headers.adoc[]
+
 ==== 요청 필드
 
-include::{snippets}/user-update/request-fields.adoc[]
+include::{snippets}/user/update/request-fields.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/user/update/response-fields.adoc[]
 
 ==== 요청 예시
 
-include::{snippets}/user-update/http-request.adoc[]
+include::{snippets}/user/update/http-request.adoc[]
 
 ==== 응답 예시
 
-include::{snippets}/user-update/http-response.adoc[]
+include::{snippets}/user/update/http-response.adoc[]
 
 ==== CURL 요청 예시
 
-include::{snippets}/user-update/curl-request.adoc[]
+include::{snippets}/user/update/curl-request.adoc[]
+
+[[profile]]
+== Profile
+
+회원 정보 조회, 팔로우, 언팔로우
+
+[[profile-find-user]]
+=== 회원 정보 조회
+
+==== GET /api/profiles/{username}
+
+유저명으로 회원 프로필을 조회한다.
+
+==== 요청 헤더
+
+include::{snippets}/profile/find-user/request-headers.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/profile/find-user/response-fields.adoc[]
+
+==== 요청 예시
+
+include::{snippets}/profile/find-user/http-request.adoc[]
+
+==== 응답 예시
+
+include::{snippets}/profile/find-user/http-response.adoc[]
+
+==== CURL 요청 예시
+
+include::{snippets}/profile/find-user/curl-request.adoc[]
+
+[[profile-follow]]
+=== 팔로우
+
+==== POST /api/profiles/{username}/follow
+
+유저명으로 회원을 팔로우한다.
+
+==== 요청 헤더
+
+include::{snippets}/profile/follow/request-headers.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/profile/follow/response-fields.adoc[]
+
+==== 요청 예시
+
+include::{snippets}/profile/follow/http-request.adoc[]
+
+==== 응답 예시
+
+include::{snippets}/profile/follow/http-response.adoc[]
+
+==== CURL 요청 예시
+
+include::{snippets}/profile/follow/curl-request.adoc[]
+
+[[profile-unfollow]]
+=== 언팔로우
+
+==== DELETE /api/profiles/{username}/follow
+
+유저명으로 회원을 언팔로우한다.
+
+==== 요청 헤더
+
+include::{snippets}/profile/unfollow/request-headers.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/profile/unfollow/response-fields.adoc[]
+
+==== 요청 예시
+
+include::{snippets}/profile/unfollow/http-request.adoc[]
+
+==== 응답 예시
+
+include::{snippets}/profile/unfollow/http-response.adoc[]
+
+==== CURL 요청 예시
+
+include::{snippets}/profile/unfollow/curl-request.adoc[]

@@ -12,6 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jeeneee.realworld.infra.config.JacksonConfig;
 import com.jeeneee.realworld.infra.security.JwtAuthenticationFilter;
 import com.jeeneee.realworld.infra.security.LoginUserMethodArgumentResolver;
+import com.jeeneee.realworld.infra.security.OptionalUserMethodArgumentResolver;
 import com.jeeneee.realworld.infra.security.TokenProvider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,7 +38,10 @@ public class ControllerTest {
     protected TokenProvider tokenProvider;
 
     @MockBean
-    protected LoginUserMethodArgumentResolver resolver;
+    protected LoginUserMethodArgumentResolver loginUserResolver;
+
+    @MockBean
+    protected OptionalUserMethodArgumentResolver optionalUserResolver;
 
     protected MockMvc mockMvc;
 
@@ -58,7 +62,9 @@ public class ControllerTest {
             .alwaysDo(print())
             .build();
 
-        given(resolver.supportsParameter(any())).willReturn(true);
-        given(resolver.resolveArgument(any(), any(), any(), any())).willReturn(USER1);
+        given(loginUserResolver.supportsParameter(any())).willReturn(true);
+        given(loginUserResolver.resolveArgument(any(), any(), any(), any())).willReturn(USER1);
+        given(optionalUserResolver.supportsParameter(any())).willReturn(true);
+        given(optionalUserResolver.resolveArgument(any(), any(), any(), any())).willReturn(USER1);
     }
 }

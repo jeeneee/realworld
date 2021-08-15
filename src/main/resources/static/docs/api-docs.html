@@ -458,6 +458,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#_post_apiusers">POST /api/users</a></li>
 <li><a href="#_요청_필드">요청 필드</a></li>
+<li><a href="#_응답_필드">응답 필드</a></li>
 <li><a href="#_요청_예시">요청 예시</a></li>
 <li><a href="#_응답_예시">응답 예시</a></li>
 <li><a href="#_curl_요청_예시">CURL 요청 예시</a></li>
@@ -467,18 +468,65 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel3">
 <li><a href="#_post_apiuserslogin">POST /api/users/login</a></li>
 <li><a href="#_요청_필드_2">요청 필드</a></li>
+<li><a href="#_응답_필드_2">응답 필드</a></li>
 <li><a href="#_요청_예시_2">요청 예시</a></li>
 <li><a href="#_응답_예시_2">응답 예시</a></li>
 <li><a href="#_curl_요청_예시_2">CURL 요청 예시</a></li>
 </ul>
 </li>
-<li><a href="#user-update">개인 정보 수정</a>
+<li><a href="#user-find-my-info">개인 정보 조회</a>
 <ul class="sectlevel3">
-<li><a href="#_put_apiuser">PUT /api/user</a></li>
-<li><a href="#_요청_필드_3">요청 필드</a></li>
+<li><a href="#_get_apiuser">GET /api/user</a></li>
+<li><a href="#_요청_헤더">요청 헤더</a></li>
+<li><a href="#_응답_필드_3">응답 필드</a></li>
 <li><a href="#_요청_예시_3">요청 예시</a></li>
 <li><a href="#_응답_예시_3">응답 예시</a></li>
 <li><a href="#_curl_요청_예시_3">CURL 요청 예시</a></li>
+</ul>
+</li>
+<li><a href="#user-update">개인 정보 수정</a>
+<ul class="sectlevel3">
+<li><a href="#_put_apiuser">PUT /api/user</a></li>
+<li><a href="#_요청_헤더_2">요청 헤더</a></li>
+<li><a href="#_요청_필드_3">요청 필드</a></li>
+<li><a href="#_응답_필드_4">응답 필드</a></li>
+<li><a href="#_요청_예시_4">요청 예시</a></li>
+<li><a href="#_응답_예시_4">응답 예시</a></li>
+<li><a href="#_curl_요청_예시_4">CURL 요청 예시</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#profile">Profile</a>
+<ul class="sectlevel2">
+<li><a href="#profile-find-user">회원 정보 조회</a>
+<ul class="sectlevel3">
+<li><a href="#_get_apiprofilesusername">GET /api/profiles/{username}</a></li>
+<li><a href="#_요청_헤더_3">요청 헤더</a></li>
+<li><a href="#_응답_필드_5">응답 필드</a></li>
+<li><a href="#_요청_예시_5">요청 예시</a></li>
+<li><a href="#_응답_예시_5">응답 예시</a></li>
+<li><a href="#_curl_요청_예시_5">CURL 요청 예시</a></li>
+</ul>
+</li>
+<li><a href="#profile-follow">팔로우</a>
+<ul class="sectlevel3">
+<li><a href="#_post_apiprofilesusernamefollow">POST /api/profiles/{username}/follow</a></li>
+<li><a href="#_요청_헤더_4">요청 헤더</a></li>
+<li><a href="#_응답_필드_6">응답 필드</a></li>
+<li><a href="#_요청_예시_6">요청 예시</a></li>
+<li><a href="#_응답_예시_6">응답 예시</a></li>
+<li><a href="#_curl_요청_예시_6">CURL 요청 예시</a></li>
+</ul>
+</li>
+<li><a href="#profile-unfollow">언팔로우</a>
+<ul class="sectlevel3">
+<li><a href="#_delete_apiprofilesusernamefollow">DELETE /api/profiles/{username}/follow</a></li>
+<li><a href="#_요청_헤더_5">요청 헤더</a></li>
+<li><a href="#_응답_필드_7">응답 필드</a></li>
+<li><a href="#_요청_예시_7">요청 예시</a></li>
+<li><a href="#_응답_예시_7">응답 예시</a></li>
+<li><a href="#_curl_요청_예시_7">CURL 요청 예시</a></li>
 </ul>
 </li>
 </ul>
@@ -640,6 +688,50 @@ Users of the API should not create URIs themselves, instead they should use the 
 </table>
 </div>
 <div class="sect3">
+<h4 id="_응답_필드"><a class="link" href="#_응답_필드">응답 필드</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이메일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.token</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">토큰</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.username</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">유저명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.bio</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">자기소개</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.image</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Null</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미지</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
 <h4 id="_요청_예시"><a class="link" href="#_요청_예시">요청 예시</a></h4>
 <div class="listingblock">
 <div class="content">
@@ -744,6 +836,50 @@ Content-Length: 136
 </table>
 </div>
 <div class="sect3">
+<h4 id="_응답_필드_2"><a class="link" href="#_응답_필드_2">응답 필드</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이메일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.token</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">토큰</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.username</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">유저명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.bio</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">자기소개</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.image</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미지</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
 <h4 id="_요청_예시_2"><a class="link" href="#_요청_예시_2">요청 예시</a></h4>
 <div class="listingblock">
 <div class="content">
@@ -803,11 +939,135 @@ Content-Length: 209
 </div>
 </div>
 <div class="sect2">
+<h3 id="user-find-my-info"><a class="link" href="#user-find-my-info">개인 정보 조회</a></h3>
+<div class="sect3">
+<h4 id="_get_apiuser"><a class="link" href="#_get_apiuser">GET /api/user</a></h4>
+<div class="paragraph">
+<p>이메일, 비밀번호로 로그인 할 수 있다.
+로그인에 성공한 경우, 토큰을 발행하고 해당 회원 정보를 응답한다.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_요청_헤더"><a class="link" href="#_요청_헤더">요청 헤더</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">헤더명</th>
+<th class="tableblock halign-left valign-top">필수값</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">토큰</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_응답_필드_3"><a class="link" href="#_응답_필드_3">응답 필드</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이메일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.token</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">토큰</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.username</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">유저명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.bio</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">자기소개</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.image</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미지</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_요청_예시_3"><a class="link" href="#_요청_예시_3">요청 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/user HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Accept: application/json
+Authorization: Token abc.def.ghi
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_응답_예시_3"><a class="link" href="#_응답_예시_3">응답 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json;charset=UTF-8
+Content-Length: 209
+
+{
+  "user" : {
+    "email" : "user@abc.com",
+    "token" : "abc.def.ghi",
+    "username" : "username",
+    "bio" : "반갑습니다.",
+    "image" : "https://avatars.githubusercontent.com/u/23521870?v=4"
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_curl_요청_예시_3"><a class="link" href="#_curl_요청_예시_3">CURL 요청 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/api/user' -i -X GET \
+    -H 'Content-Type: application/json;charset=UTF-8' \
+    -H 'Accept: application/json' \
+    -H 'Authorization: Token abc.def.ghi'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="user-update"><a class="link" href="#user-update">개인 정보 수정</a></h3>
 <div class="sect3">
 <h4 id="_put_apiuser"><a class="link" href="#_put_apiuser">PUT /api/user</a></h4>
 <div class="paragraph">
-<p>Authorization 헤더에 회원의 토큰을 담아서 수정할 회원 정보를 요청하면 해당 회원의 개인 정보를 수정한다.</p>
+<p>수정할 회원 정보를 요청하면 해당 회원의 개인 정보를 수정한다.</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -823,6 +1083,30 @@ Content-Length: 209
 </tr>
 </table>
 </div>
+</div>
+<div class="sect3">
+<h4 id="_요청_헤더_2"><a class="link" href="#_요청_헤더_2">요청 헤더</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">헤더명</th>
+<th class="tableblock halign-left valign-top">필수값</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">토큰</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="sect3">
 <h4 id="_요청_필드_3"><a class="link" href="#_요청_필드_3">요청 필드</a></h4>
@@ -876,7 +1160,51 @@ Content-Length: 209
 </table>
 </div>
 <div class="sect3">
-<h4 id="_요청_예시_3"><a class="link" href="#_요청_예시_3">요청 예시</a></h4>
+<h4 id="_응답_필드_4"><a class="link" href="#_응답_필드_4">응답 필드</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.email</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이메일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.token</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">토큰</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.username</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">유저명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.bio</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">자기소개</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>user.image</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미지</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_요청_예시_4"><a class="link" href="#_요청_예시_4">요청 예시</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">PUT /api/user HTTP/1.1
@@ -899,7 +1227,7 @@ Host: localhost:8080
 </div>
 </div>
 <div class="sect3">
-<h4 id="_응답_예시_3"><a class="link" href="#_응답_예시_3">응답 예시</a></h4>
+<h4 id="_응답_예시_4"><a class="link" href="#_응답_예시_4">응답 예시</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
@@ -922,7 +1250,7 @@ Content-Length: 209
 </div>
 </div>
 <div class="sect3">
-<h4 id="_curl_요청_예시_3"><a class="link" href="#_curl_요청_예시_3">CURL 요청 예시</a></h4>
+<h4 id="_curl_요청_예시_4"><a class="link" href="#_curl_요청_예시_4">CURL 요청 예시</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/api/user' -i -X PUT \
@@ -944,11 +1272,358 @@ Content-Length: 209
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="profile"><a class="link" href="#profile">Profile</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>회원 정보 조회, 팔로우, 언팔로우</p>
+</div>
+<div class="sect2">
+<h3 id="profile-find-user"><a class="link" href="#profile-find-user">회원 정보 조회</a></h3>
+<div class="sect3">
+<h4 id="_get_apiprofilesusername"><a class="link" href="#_get_apiprofilesusername">GET /api/profiles/{username}</a></h4>
+<div class="paragraph">
+<p>유저명으로 회원 프로필을 조회한다.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_요청_헤더_3"><a class="link" href="#_요청_헤더_3">요청 헤더</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">헤더명</th>
+<th class="tableblock halign-left valign-top">필수값</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">토큰</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_응답_필드_5"><a class="link" href="#_응답_필드_5">응답 필드</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profile.username</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">유저명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profile.bio</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">자기소개</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profile.image</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profile.following</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">팔로잉 여부</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_요청_예시_5"><a class="link" href="#_요청_예시_5">요청 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/profiles/jeeneee HTTP/1.1
+Authorization: Token abc.def.ghi
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_응답_예시_5"><a class="link" href="#_응답_예시_5">응답 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json;charset=UTF-8
+Content-Length: 177
+
+{
+  "profile" : {
+    "username" : "jeeneee",
+    "bio" : "안녕하세요.",
+    "image" : "https://avatars.githubusercontent.com/u/39071798?v=4",
+    "following" : false
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_curl_요청_예시_5"><a class="link" href="#_curl_요청_예시_5">CURL 요청 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/api/profiles/jeeneee' -i -X GET \
+    -H 'Authorization: Token abc.def.ghi'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="profile-follow"><a class="link" href="#profile-follow">팔로우</a></h3>
+<div class="sect3">
+<h4 id="_post_apiprofilesusernamefollow"><a class="link" href="#_post_apiprofilesusernamefollow">POST /api/profiles/{username}/follow</a></h4>
+<div class="paragraph">
+<p>유저명으로 회원을 팔로우한다.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_요청_헤더_4"><a class="link" href="#_요청_헤더_4">요청 헤더</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">헤더명</th>
+<th class="tableblock halign-left valign-top">필수값</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">토큰</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_응답_필드_6"><a class="link" href="#_응답_필드_6">응답 필드</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profile.username</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">유저명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profile.bio</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">자기소개</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profile.image</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profile.following</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">팔로잉 여부</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_요청_예시_6"><a class="link" href="#_요청_예시_6">요청 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">POST /api/profiles/jeeneee/follow HTTP/1.1
+Authorization: Token abc.def.ghi
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_응답_예시_6"><a class="link" href="#_응답_예시_6">응답 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json;charset=UTF-8
+Content-Length: 176
+
+{
+  "profile" : {
+    "username" : "jeeneee",
+    "bio" : "안녕하세요.",
+    "image" : "https://avatars.githubusercontent.com/u/39071798?v=4",
+    "following" : true
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_curl_요청_예시_6"><a class="link" href="#_curl_요청_예시_6">CURL 요청 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/api/profiles/jeeneee/follow' -i -X POST \
+    -H 'Authorization: Token abc.def.ghi'</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="profile-unfollow"><a class="link" href="#profile-unfollow">언팔로우</a></h3>
+<div class="sect3">
+<h4 id="_delete_apiprofilesusernamefollow"><a class="link" href="#_delete_apiprofilesusernamefollow">DELETE /api/profiles/{username}/follow</a></h4>
+<div class="paragraph">
+<p>유저명으로 회원을 언팔로우한다.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_요청_헤더_5"><a class="link" href="#_요청_헤더_5">요청 헤더</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">헤더명</th>
+<th class="tableblock halign-left valign-top">필수값</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">토큰</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_응답_필드_7"><a class="link" href="#_응답_필드_7">응답 필드</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profile.username</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">유저명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profile.bio</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">자기소개</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profile.image</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>profile.following</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">팔로잉 여부</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_요청_예시_7"><a class="link" href="#_요청_예시_7">요청 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">DELETE /api/profiles/jeeneee/follow HTTP/1.1
+Authorization: Token abc.def.ghi
+Host: localhost:8080</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_응답_예시_7"><a class="link" href="#_응답_예시_7">응답 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Vary: Origin
+Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Headers
+Content-Type: application/json;charset=UTF-8
+Content-Length: 177
+
+{
+  "profile" : {
+    "username" : "jeeneee",
+    "bio" : "안녕하세요.",
+    "image" : "https://avatars.githubusercontent.com/u/39071798?v=4",
+    "following" : false
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_curl_요청_예시_7"><a class="link" href="#_curl_요청_예시_7">CURL 요청 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code data-lang="bash" class="language-bash hljs">$ curl 'http://localhost:8080/api/profiles/jeeneee/follow' -i -X DELETE \
+    -H 'Authorization: Token abc.def.ghi'</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2021-08-14 23:20:20 +0900
+Last updated 2021-08-15 19:32:55 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
