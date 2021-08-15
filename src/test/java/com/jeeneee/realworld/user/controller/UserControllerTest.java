@@ -59,7 +59,7 @@ class UserControllerTest extends ControllerTest {
 
         result.andExpect(status().isCreated())
             .andDo(
-                document("user-register",
+                document("user/register",
                     preprocessRequest(prettyPrint()),
                     preprocessResponse(prettyPrint()),
                     requestFields(
@@ -97,7 +97,7 @@ class UserControllerTest extends ControllerTest {
 
         result.andExpect(status().isOk())
             .andDo(
-                document("user-login",
+                document("user/login",
                     preprocessRequest(prettyPrint()),
                     preprocessResponse(prettyPrint()),
                     requestFields(
@@ -117,7 +117,7 @@ class UserControllerTest extends ControllerTest {
             );
     }
 
-    @DisplayName("토큰을 통한 개인정보 조회")
+    @DisplayName("개인정보 조회")
     @Test
     void find() throws Exception {
         ResultActions result = mockMvc.perform(
@@ -129,7 +129,7 @@ class UserControllerTest extends ControllerTest {
 
         result.andExpect(status().isOk())
             .andDo(
-                document("user-login",
+                document("user/find-my-info",
                     preprocessRequest(prettyPrint()),
                     preprocessResponse(prettyPrint()),
                     requestHeaders(
@@ -164,7 +164,7 @@ class UserControllerTest extends ControllerTest {
 
         result.andExpect(status().isOk())
             .andDo(
-                document("user-update",
+                document("user/update",
                     preprocessRequest(prettyPrint()),
                     preprocessResponse(prettyPrint()),
                     requestHeaders(
