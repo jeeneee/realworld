@@ -281,3 +281,120 @@ include::{snippets}/profile/unfollow/http-response.adoc[]
 ==== CURL 요청 예시
 
 include::{snippets}/profile/unfollow/curl-request.adoc[]
+
+[[article]]
+== Article
+
+게시글 생성, 수정, 삭제, 단일 조회
+
+[[article-create]]
+=== 게시글 생성
+
+==== POST /api/articles
+
+게시글 생성에 성공하면 해당 게시글 정보를 응답한다.
+
+==== 요청 헤더
+
+include::{snippets}/article/create/request-headers.adoc[]
+
+==== 요청 필드
+
+include::{snippets}/article/create/request-fields.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/article/create/response-fields.adoc[]
+
+==== 요청 예시
+
+include::{snippets}/article/create/http-request.adoc[]
+
+==== 응답 예시
+
+include::{snippets}/article/create/http-response.adoc[]
+
+==== CURL 요청 예시
+
+include::{snippets}/article/create/curl-request.adoc[]
+
+[[article-update]]
+=== 게시글 수정
+
+==== PUT /api/articles/{slug}
+
+게시글 수정에 성공하면 해당 게시글 정보를 응답한다.
+
+==== 요청 헤더
+
+include::{snippets}/article/update/request-headers.adoc[]
+
+==== 요청 필드
+
+include::{snippets}/article/update/request-fields.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/article/update/response-fields.adoc[]
+
+==== 요청 예시
+
+include::{snippets}/article/update/http-request.adoc[]
+
+==== 응답 예시
+
+include::{snippets}/article/update/http-response.adoc[]
+
+==== CURL 요청 예시
+
+include::{snippets}/article/update/curl-request.adoc[]
+
+[[article-delete]]
+=== 게시글 삭제
+
+==== DELETE /api/articles/{slug}
+
+게시글 삭제에 성공하면 HTTP 204 No Content 상태 코드를 응답한다.
+
+==== 요청 헤더
+
+include::{snippets}/article/delete/request-headers.adoc[]
+
+==== 요청 예시
+
+include::{snippets}/article/delete/http-request.adoc[]
+
+==== 응답 예시
+
+include::{snippets}/article/delete/http-response.adoc[]
+
+==== CURL 요청 예시
+
+include::{snippets}/article/delete/curl-request.adoc[]
+
+[[article-find-one-by-slug]]
+=== 게시글 단일 조회
+
+==== GET /api/articles/{slug}
+
+요청한 슬러그에 해당하는 게시글을 응답한다.
+
+==== 요청 헤더
+
+include::{snippets}/article/find-one-by-slug/request-headers.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/article/find-one-by-slug/response-fields.adoc[]
+
+==== 요청 예시
+
+include::{snippets}/article/find-one-by-slug/http-request.adoc[]
+
+==== 응답 예시
+
+include::{snippets}/article/find-one-by-slug/http-response.adoc[]
+
+==== CURL 요청 예시
+
+include::{snippets}/article/find-one-by-slug/curl-request.adoc[]

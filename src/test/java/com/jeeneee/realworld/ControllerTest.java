@@ -6,6 +6,8 @@ import static com.jeeneee.realworld.infra.security.TokenProvider.HEADER_PREFIX;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.removeHeaders;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -49,7 +51,7 @@ public class ControllerTest {
 
     @BeforeEach
     protected void setUp(WebApplicationContext webApplicationContext,
-        RestDocumentationContextProvider restDocumentationContextProvider) {
+        RestDocumentationContextProvider restDocumentation) {
         JwtAuthenticationFilter jwtAuthenticationFilter = webApplicationContext
             .getBean("jwtAuthenticationFilter", JwtAuthenticationFilter.class);
         objectMapper = webApplicationContext.getBean("mappingJackson2HttpMessageConverter",
@@ -58,7 +60,10 @@ public class ControllerTest {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
             .addFilters(new CharacterEncodingFilter("UTF-8", true))
             .addFilters(jwtAuthenticationFilter)
-            .apply(documentationConfiguration(restDocumentationContextProvider))
+            .apply(documentationConfiguration(restDocumentation).operationPreprocessors()
+                .withRequestDefaults(prettyPrint(), removeHeaders("Content-Length", "Host"))
+                .withResponseDefaults(prettyPrint(), removeHeaders("Content-Length", "Vary"))
+            )
             .alwaysDo(print())
             .build();
 

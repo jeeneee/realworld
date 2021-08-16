@@ -4,7 +4,6 @@ import com.jeeneee.realworld.user.domain.User;
 import com.jeeneee.realworld.user.domain.UserRepository;
 import com.jeeneee.realworld.user.dto.ProfileResponse;
 import com.jeeneee.realworld.user.exception.UserNotFoundException;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,24 +17,21 @@ public class ProfileService {
 
     public ProfileResponse find(String username, User user) {
         User target = getUserByUsername(username);
-        if (Optional.ofNullable(user).isEmpty()) {
-            return ProfileResponse.of(target, false);
-        }
-        return ProfileResponse.of(target, user.followed(target));
+        return ProfileResponse.of(target, user);
     }
 
     @Transactional
     public ProfileResponse follow(String username, User user) {
         User target = getUserByUsername(username);
         user.follow(target);
-        return ProfileResponse.of(target, user.followed(target));
+        return ProfileResponse.of(target, user);
     }
 
     @Transactional
     public ProfileResponse unfollow(String username, User user) {
         User target = getUserByUsername(username);
         user.unfollow(target);
-        return ProfileResponse.of(target, user.followed(target));
+        return ProfileResponse.of(target, user);
     }
 
     private User getUserByUsername(String username) {

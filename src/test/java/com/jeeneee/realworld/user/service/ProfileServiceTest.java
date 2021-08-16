@@ -29,7 +29,6 @@ class ProfileServiceTest {
     private ProfileService profileService;
 
     private User user;
-
     private User target;
 
     @BeforeEach

@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.URL;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @JsonRootName("user")
-public class UpdateRequest {
+public class UserUpdateRequest {
 
     @Length(min = 2, max = 20, message = "username should be between 2-20")
     private String username;

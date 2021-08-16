@@ -1,27 +1,55 @@
 package com.jeeneee.realworld.fixture;
 
 import static com.jeeneee.realworld.fixture.UserFixture.USER1;
-import static com.jeeneee.realworld.fixture.UserFixture.USER2;
 
 import com.jeeneee.realworld.article.domain.Article;
+import com.jeeneee.realworld.article.dto.ArticleCreateRequest;
+import com.jeeneee.realworld.article.dto.ArticleUpdateRequest;
+import com.jeeneee.realworld.tag.domain.Tag;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class ArticleFixture {
 
-    public static final Article ARTICLE1 = Article.builder()
-        .id(1L)
+    public static Article ARTICLE1 = Article.builder()
         .title("How to train your dragon")
         .description("Ever wonder how?")
         .body("You have to believe")
         .author(USER1)
+        .createdAt(LocalDateTime.now())
+        .updatedAt(LocalDateTime.now())
         .build();
 
-    public static final Article ARTICLE2 = Article.builder()
-        .id(2L)
-        .title("gradle 멀티모듈 구성")
-        .description("데모 프로젝트인 realworld를 기반으로 글을 작성해보려 한다.")
-        .body("비록 작은 규모의 프로젝트지만 단일 프로젝트가 아닌 멀티모듈로 구성해보자.\n"
-            + "멀티모듈에 대한 자세한 설명과 장점은 멀티모듈 설계 이야기 with Spring, Gradle 블로깅을 참고하면 좋다.\n"
-            + "여기선 realworld란 root 프로젝트 안에 realworld-api, realworld-common, realworld-core란 서브모듈을 둘 것이다.")
-        .author(USER2)
+    public static Article ARTICLE2 = Article.builder()
+        .title("Did you train your dragon?")
+        .description("Ever wonder why?")
+        .body("you must believe")
+        .author(USER1)
+        .createdAt(LocalDateTime.now())
+        .updatedAt(LocalDateTime.now())
+        .build();
+
+    public static final Tag TAG1 = Tag.create("reactjs");
+    public static final Tag TAG2 = Tag.create("angularjs");
+    public static final Tag TAG3 = Tag.create("java");
+
+    static {
+        ARTICLE1.addTag(TAG1);
+        ARTICLE1.addTag(TAG2);
+        ARTICLE2.addTag(TAG1);
+        ARTICLE2.addTag(TAG2);
+    }
+
+    public static final ArticleCreateRequest CREATE_REQUEST = ArticleCreateRequest.builder()
+        .title(ARTICLE1.getTitle())
+        .description(ARTICLE1.getDescription())
+        .body(ARTICLE1.getBody())
+        .tagList(List.of(TAG1.getName(), TAG2.getName()))
+        .build();
+
+    public static final ArticleUpdateRequest UPDATE_REQUEST = ArticleUpdateRequest.builder()
+        .title(ARTICLE2.getTitle())
+        .description(ARTICLE2.getDescription())
+        .body(ARTICLE2.getBody())
         .build();
 }

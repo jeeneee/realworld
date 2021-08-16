@@ -8,9 +8,12 @@ import com.jeeneee.realworld.common.exception.IllegalParameterException;
 import com.jeeneee.realworld.tag.domain.Tag;
 import com.jeeneee.realworld.user.domain.User;
 import com.jeeneee.realworld.user.exception.UserNotFoundException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -61,7 +64,7 @@ public class Article extends BaseTimeEntity {
     @JoinTable(name = "article_tags",
         joinColumns = @JoinColumn(name = "article_id"),
         inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    private final List<Tag> tags = new ArrayList<>();
+    private final Set<Tag> tags = new HashSet<>();
 
     @ManyToMany
     @JoinTable(name = "article_favorites",
@@ -70,7 +73,9 @@ public class Article extends BaseTimeEntity {
     private final List<User> favorites = new ArrayList<>();
 
     @Builder
-    private Article(Long id, String title, String description, String body, User author) {
+    private Article(Long id, String title, String description, String body, User author,
+        LocalDateTime createdAt, LocalDateTime updatedAt) {
+        super(createdAt, updatedAt);
         validateParams(title, description, body, author);
         this.id = id;
         this.title = title;
@@ -88,19 +93,16 @@ public class Article extends BaseTimeEntity {
     }
 
     public void update(String title, String description, String body) {
-        validateParams(title, description, body, this.author);
-        this.title = title;
-        this.slug = Slug.from(title);
-        this.description = description;
-        this.body = body;
+        if (title != null) {
+            this.title = title;
+            this.slug = Slug.from(title);
+        }
+        this.description = description == null ? this.description : description;
+        this.body = body == null ? this.body : body;
     }
 
     public void addTag(Tag tag) {
         tags.add(tag);
-    }
-
-    public void removeTag(Tag tag) {
-        tags.remove(tag);
     }
 
     public void favorite(User user) {
@@ -123,5 +125,9 @@ public class Article extends BaseTimeEntity {
 
     public int favoriteCount() {
         return favorites.size();
+    }
+
+    public String getSlugValue() {
+        return slug.getValue();
     }
 }
