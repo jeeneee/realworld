@@ -13,8 +13,8 @@ import com.jeeneee.realworld.user.domain.User;
 import com.jeeneee.realworld.user.domain.UserRepository;
 import com.jeeneee.realworld.user.dto.LoginRequest;
 import com.jeeneee.realworld.user.dto.RegisterRequest;
-import com.jeeneee.realworld.user.dto.UpdateRequest;
 import com.jeeneee.realworld.user.dto.UserResponse;
+import com.jeeneee.realworld.user.dto.UserUpdateRequest;
 import com.jeeneee.realworld.user.exception.DuplicateEmailException;
 import com.jeeneee.realworld.user.exception.DuplicateUsernameException;
 import com.jeeneee.realworld.user.exception.UserNotFoundException;
@@ -157,7 +157,7 @@ class UserServiceTest {
     @DisplayName("개인 정보 수정 - 이미 존재하는 유저명인 경우 예외 발생")
     @Test
     void update_UsernameExist_ExceptionThrown() {
-        UpdateRequest request = UpdateRequest.builder()
+        UserUpdateRequest request = UserUpdateRequest.builder()
             .username("tester")
             .build();
         given(userRepository.existsByUsername(any())).willReturn(true);
@@ -169,7 +169,7 @@ class UserServiceTest {
     @DisplayName("개인 정보 수정 - 이미 존재하는 이메일인 경우 예외 발생")
     @Test
     void update_EmailExist_ExceptionThrown() {
-        UpdateRequest request = UpdateRequest.builder()
+        UserUpdateRequest request = UserUpdateRequest.builder()
             .email("test@test.com")
             .username("tester")
             .build();
@@ -183,7 +183,7 @@ class UserServiceTest {
     @DisplayName("개인 정보 수정")
     @Test
     void update_Normal_Success() {
-        UpdateRequest request = UpdateRequest.builder()
+        UserUpdateRequest request = UserUpdateRequest.builder()
             .email("test@test.com")
             .username("테스터")
             .password("password")

@@ -98,7 +98,7 @@ public class ArticleTest {
             .author(author)
             .build();
 
-        assertThat(created.getSlug().getValue()).isEqualTo(ARTICLE_SLUG);
+        assertThat(created.getSlugValue()).isEqualTo(ARTICLE_SLUG);
         assertThat(created.getTitle()).isEqualTo(ARTICLE_TITLE);
         assertThat(created.getDescription()).isEqualTo(ARTICLE_DESCRIPTION);
         assertThat(created.getBody()).isEqualTo(ARTICLE_BODY);
@@ -113,7 +113,7 @@ public class ArticleTest {
         article.update(title, article.getDescription(), article.getBody());
 
         assertThat(article.getTitle()).isEqualTo(title);
-        assertThat(article.getSlug().getValue()).isEqualTo("did-you-train-your-dragon");
+        assertThat(article.getSlugValue()).isEqualTo("did-you-train-your-dragon");
     }
 
     @DisplayName("찜한 게시글을 다시 찜하면 예외 발생")

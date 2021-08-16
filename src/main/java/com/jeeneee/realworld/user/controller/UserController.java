@@ -4,8 +4,8 @@ import com.jeeneee.realworld.infra.security.LoginUser;
 import com.jeeneee.realworld.user.domain.User;
 import com.jeeneee.realworld.user.dto.LoginRequest;
 import com.jeeneee.realworld.user.dto.RegisterRequest;
-import com.jeeneee.realworld.user.dto.UpdateRequest;
 import com.jeeneee.realworld.user.dto.UserResponse;
+import com.jeeneee.realworld.user.dto.UserUpdateRequest;
 import com.jeeneee.realworld.user.service.UserService;
 import java.net.URI;
 import javax.validation.Valid;
@@ -40,7 +40,7 @@ public class UserController {
     }
 
     @PutMapping("/api/user")
-    public ResponseEntity<UserResponse> update(@Valid @RequestBody UpdateRequest request,
+    public ResponseEntity<UserResponse> update(@Valid @RequestBody UserUpdateRequest request,
         @LoginUser User user) {
         return ResponseEntity.ok().body(userService.update(request, user));
     }

@@ -5,8 +5,8 @@ import com.jeeneee.realworld.user.domain.User;
 import com.jeeneee.realworld.user.domain.UserRepository;
 import com.jeeneee.realworld.user.dto.LoginRequest;
 import com.jeeneee.realworld.user.dto.RegisterRequest;
-import com.jeeneee.realworld.user.dto.UpdateRequest;
 import com.jeeneee.realworld.user.dto.UserResponse;
+import com.jeeneee.realworld.user.dto.UserUpdateRequest;
 import com.jeeneee.realworld.user.exception.DuplicateEmailException;
 import com.jeeneee.realworld.user.exception.DuplicateUsernameException;
 import com.jeeneee.realworld.user.exception.UserNotFoundException;
@@ -45,7 +45,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponse update(UpdateRequest request, User user) {
+    public UserResponse update(UserUpdateRequest request, User user) {
         Optional.ofNullable(request.getUsername()).ifPresent(this::validateUsername);
         Optional.ofNullable(request.getEmail()).ifPresent(this::validateEmail);
         Optional.ofNullable(request.getPassword()).ifPresent(

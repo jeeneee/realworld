@@ -3,7 +3,7 @@ package com.jeeneee.realworld.fixture;
 import com.jeeneee.realworld.user.domain.User;
 import com.jeeneee.realworld.user.dto.LoginRequest;
 import com.jeeneee.realworld.user.dto.RegisterRequest;
-import com.jeeneee.realworld.user.dto.UpdateRequest;
+import com.jeeneee.realworld.user.dto.UserUpdateRequest;
 
 public class UserFixture {
 
@@ -44,12 +44,12 @@ public class UserFixture {
         .email(USER1.getEmail())
         .password("password")
         .build();
-    public static final UpdateRequest UPDATE_REQUEST = UpdateRequest.builder()
+
+    public static final UserUpdateRequest UPDATE_REQUEST = UserUpdateRequest.builder()
         .email(USER2.getEmail())
         .username(USER2.getUsername())
         .password("password2")
         .image(USER2.getImage())
         .bio(USER2.getBio())
         .build();
-
 }

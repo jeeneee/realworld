@@ -6,9 +6,6 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
 import static org.springframework.restdocs.headers.HeaderDocumentation.requestHeaders;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -17,6 +14,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.jeeneee.realworld.ControllerTest;
+import com.jeeneee.realworld.descriptor.ProfileFieldDescriptor;
 import com.jeeneee.realworld.user.domain.User;
 import com.jeeneee.realworld.user.dto.ProfileResponse;
 import com.jeeneee.realworld.user.service.ProfileService;
@@ -24,7 +22,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -48,17 +45,12 @@ class ProfileControllerTest extends ControllerTest {
         result.andExpect(status().isOk())
             .andDo(
                 document("profile/find-user",
-                    preprocessRequest(prettyPrint()),
-                    preprocessResponse(prettyPrint()),
                     requestHeaders(
                         headerWithName(AUTHORIZATION_HEADER_NAME).description("토큰").optional()
                     ),
                     responseFields(
-                        fieldWithPath("profile.username").type(JsonFieldType.STRING).description("유저명"),
-                        fieldWithPath("profile.bio").type(JsonFieldType.STRING).description("자기소개"),
-                        fieldWithPath("profile.image").type(JsonFieldType.STRING).description("이미지"),
-                        fieldWithPath("profile.following").type(JsonFieldType.BOOLEAN).description("팔로잉 여부")
-                    )
+                        fieldWithPath("profile").type(JsonFieldType.OBJECT).description("프로필")
+                    ).andWithPrefix("profile.", ProfileFieldDescriptor.profile)
                 )
             );
     }
@@ -77,17 +69,12 @@ class ProfileControllerTest extends ControllerTest {
         result.andExpect(status().isOk())
             .andDo(
                 document("profile/follow",
-                    preprocessRequest(prettyPrint()),
-                    preprocessResponse(prettyPrint()),
                     requestHeaders(
                         headerWithName(AUTHORIZATION_HEADER_NAME).description("토큰")
                     ),
                     responseFields(
-                        fieldWithPath("profile.username").type(JsonFieldType.STRING).description("유저명"),
-                        fieldWithPath("profile.bio").type(JsonFieldType.STRING).description("자기소개"),
-                        fieldWithPath("profile.image").type(JsonFieldType.STRING).description("이미지"),
-                        fieldWithPath("profile.following").type(JsonFieldType.BOOLEAN).description("팔로잉 여부")
-                    )
+                        fieldWithPath("profile").type(JsonFieldType.OBJECT).description("프로필")
+                    ).andWithPrefix("profile.", ProfileFieldDescriptor.profile)
                 )
             );
     }
@@ -106,17 +93,12 @@ class ProfileControllerTest extends ControllerTest {
         result.andExpect(status().isOk())
             .andDo(
                 document("profile/unfollow",
-                    preprocessRequest(prettyPrint()),
-                    preprocessResponse(prettyPrint()),
                     requestHeaders(
                         headerWithName(AUTHORIZATION_HEADER_NAME).description("토큰")
                     ),
                     responseFields(
-                        fieldWithPath("profile.username").type(JsonFieldType.STRING).description("유저명"),
-                        fieldWithPath("profile.bio").type(JsonFieldType.STRING).description("자기소개"),
-                        fieldWithPath("profile.image").type(JsonFieldType.STRING).description("이미지"),
-                        fieldWithPath("profile.following").type(JsonFieldType.BOOLEAN).description("팔로잉 여부")
-                    )
+                        fieldWithPath("profile").type(JsonFieldType.OBJECT).description("프로필")
+                    ).andWithPrefix("profile.", ProfileFieldDescriptor.profile)
                 )
             );
     }

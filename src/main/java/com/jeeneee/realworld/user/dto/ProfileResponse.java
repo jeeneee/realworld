@@ -20,6 +20,16 @@ public class ProfileResponse {
     private String image;
     private boolean following;
 
+    public static ProfileResponse of(User target, User user) {
+        boolean following = user != null && user.followed(target);
+        return ProfileResponse.builder()
+            .username(target.getUsername())
+            .bio(target.getBio())
+            .image(target.getImage())
+            .following(following)
+            .build();
+    }
+
     public static ProfileResponse of(User target, boolean following) {
         return ProfileResponse.builder()
             .username(target.getUsername())
