@@ -29,11 +29,19 @@ dependencies {
     implementation 'mysql:mysql-connector-java'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'com.querydsl:querydsl-core'
+    implementation 'com.querydsl:querydsl-jpa'
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.7.1'
 
     compileOnly 'org.projectlombok:lombok'
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor(
+            "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa",
+            'org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final',
+            'javax.annotation:javax.annotation-api',
+    )
 
     testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
     testImplementation 'org.springframework.security:spring-security-test'
@@ -48,6 +56,19 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+}
+
+def generated = 'src/main/generated'
+sourceSets {
+    main.java.srcDirs += [generated]
+}
+
+tasks.withType(JavaCompile) {
+    options.generatedSourceOutputDirectory.fileValue(file(generated))
+}
+
+clean {
+    delete file(generated)
 }
 
 ext {
@@ -79,6 +100,7 @@ sonarqube {
         property "sonar.sourceEncoding", "UTF-8"
         property "sonar.profile", "Sonar way"
         property "sonar.test.inclusions", "**/*Test.java"
+        property "sonar.coverage.exclusions", "*.html, **/Q*.java"
         property 'sonar.coverage.jacoco.xmlReportPaths', "${buildDir}/reports/jacoco/test/jacocoTestReport.xml"
     }
 }
