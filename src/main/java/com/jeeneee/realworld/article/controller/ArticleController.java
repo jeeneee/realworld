@@ -2,7 +2,9 @@ package com.jeeneee.realworld.article.controller;
 
 import com.jeeneee.realworld.article.domain.Article;
 import com.jeeneee.realworld.article.dto.ArticleCreateRequest;
+import com.jeeneee.realworld.article.dto.ArticleSearchCondition;
 import com.jeeneee.realworld.article.dto.ArticleUpdateRequest;
+import com.jeeneee.realworld.article.dto.MultipleArticleResponse;
 import com.jeeneee.realworld.article.dto.SingleArticleResponse;
 import com.jeeneee.realworld.article.service.ArticleService;
 import com.jeeneee.realworld.infra.security.LoginUser;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
@@ -53,5 +56,17 @@ public class ArticleController {
         @OptionalUser User user) {
         Article article = articleService.getArticle(slug);
         return ResponseEntity.ok().body(SingleArticleResponse.of(article, user));
+    }
+
+    @GetMapping
+    public ResponseEntity<MultipleArticleResponse> findAll(
+        @RequestParam(defaultValue = "") String tag,
+        @RequestParam(defaultValue = "") String favorited,
+        @RequestParam(defaultValue = "") String author,
+        @RequestParam(defaultValue = "0") int offset,
+        @RequestParam(defaultValue = "20") int limit,
+        @OptionalUser User user) {
+        var condition = new ArticleSearchCondition(tag, author, favorited, limit, offset);
+        return ResponseEntity.ok().body(articleService.findAll(condition, user));
     }
 }
