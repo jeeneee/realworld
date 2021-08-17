@@ -100,10 +100,6 @@ include::{snippets}/user/register/http-request.adoc[]
 
 include::{snippets}/user/register/http-response.adoc[]
 
-==== CURL 요청 예시
-
-include::{snippets}/user/register/curl-request.adoc[]
-
 [[user-login]]
 === 로그인
 
@@ -128,10 +124,6 @@ include::{snippets}/user/login/http-request.adoc[]
 
 include::{snippets}/user/login/http-response.adoc[]
 
-==== CURL 요청 예시
-
-include::{snippets}/user/login/curl-request.adoc[]
-
 [[user-find-my-info]]
 === 개인 정보 조회
 
@@ -155,10 +147,6 @@ include::{snippets}/user/find-my-info/http-request.adoc[]
 ==== 응답 예시
 
 include::{snippets}/user/find-my-info/http-response.adoc[]
-
-==== CURL 요청 예시
-
-include::{snippets}/user/find-my-info/curl-request.adoc[]
 
 [[user-update]]
 === 개인 정보 수정
@@ -192,10 +180,6 @@ include::{snippets}/user/update/http-request.adoc[]
 
 include::{snippets}/user/update/http-response.adoc[]
 
-==== CURL 요청 예시
-
-include::{snippets}/user/update/curl-request.adoc[]
-
 [[profile]]
 == Profile
 
@@ -224,10 +208,6 @@ include::{snippets}/profile/find-user/http-request.adoc[]
 
 include::{snippets}/profile/find-user/http-response.adoc[]
 
-==== CURL 요청 예시
-
-include::{snippets}/profile/find-user/curl-request.adoc[]
-
 [[profile-follow]]
 === 팔로우
 
@@ -251,10 +231,6 @@ include::{snippets}/profile/follow/http-request.adoc[]
 
 include::{snippets}/profile/follow/http-response.adoc[]
 
-==== CURL 요청 예시
-
-include::{snippets}/profile/follow/curl-request.adoc[]
-
 [[profile-unfollow]]
 === 언팔로우
 
@@ -277,10 +253,6 @@ include::{snippets}/profile/unfollow/http-request.adoc[]
 ==== 응답 예시
 
 include::{snippets}/profile/unfollow/http-response.adoc[]
-
-==== CURL 요청 예시
-
-include::{snippets}/profile/unfollow/curl-request.adoc[]
 
 [[article]]
 == Article
@@ -314,10 +286,6 @@ include::{snippets}/article/create/http-request.adoc[]
 
 include::{snippets}/article/create/http-response.adoc[]
 
-==== CURL 요청 예시
-
-include::{snippets}/article/create/curl-request.adoc[]
-
 [[article-update]]
 === 게시글 수정
 
@@ -345,10 +313,6 @@ include::{snippets}/article/update/http-request.adoc[]
 
 include::{snippets}/article/update/http-response.adoc[]
 
-==== CURL 요청 예시
-
-include::{snippets}/article/update/curl-request.adoc[]
-
 [[article-delete]]
 === 게시글 삭제
 
@@ -367,10 +331,6 @@ include::{snippets}/article/delete/http-request.adoc[]
 ==== 응답 예시
 
 include::{snippets}/article/delete/http-response.adoc[]
-
-==== CURL 요청 예시
-
-include::{snippets}/article/delete/curl-request.adoc[]
 
 [[article-find-one-by-slug]]
 === 게시글 단일 조회
@@ -395,6 +355,29 @@ include::{snippets}/article/find-one-by-slug/http-request.adoc[]
 
 include::{snippets}/article/find-one-by-slug/http-response.adoc[]
 
-==== CURL 요청 예시
+[[article-find-all]]
+=== 게시글 전체 조회
 
-include::{snippets}/article/find-one-by-slug/curl-request.adoc[]
+==== GET /api/articles?[params]
+
+요청 파라미터에 해당하는 모든 게시글을 조회한다.
+
+==== 요청 헤더
+
+include::{snippets}/article/find-all/request-headers.adoc[]
+
+==== 요청 파라미터
+
+include::{snippets}/article/find-all/request-parameters.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/article/find-all/response-fields.adoc[]
+
+==== 요청 예시
+
+include::{snippets}/article/find-all/http-request.adoc[]
+
+==== 응답 예시
+
+include::{snippets}/article/find-all/http-response.adoc[]

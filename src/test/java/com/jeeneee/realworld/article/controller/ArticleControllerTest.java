@@ -3,6 +3,7 @@ package com.jeeneee.realworld.article.controller;
 import static com.jeeneee.realworld.fixture.ArticleFixture.ARTICLE1;
 import static com.jeeneee.realworld.fixture.ArticleFixture.ARTICLE2;
 import static com.jeeneee.realworld.fixture.ArticleFixture.CREATE_REQUEST;
+import static com.jeeneee.realworld.fixture.ArticleFixture.TAG2;
 import static com.jeeneee.realworld.fixture.ArticleFixture.UPDATE_REQUEST;
 import static com.jeeneee.realworld.fixture.UserFixture.USER1;
 import static org.mockito.ArgumentMatchers.any;
@@ -14,6 +15,8 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -21,11 +24,14 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.jeeneee.realworld.ControllerTest;
+import com.jeeneee.realworld.article.dto.ArticleSearchCondition;
+import com.jeeneee.realworld.article.dto.MultipleArticleResponse;
 import com.jeeneee.realworld.article.dto.SingleArticleResponse;
 import com.jeeneee.realworld.article.service.ArticleService;
 import com.jeeneee.realworld.descriptor.ArticleFieldDescriptor;
 import com.jeeneee.realworld.descriptor.ProfileFieldDescriptor;
 import com.jeeneee.realworld.user.domain.User;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -149,6 +155,43 @@ class ArticleControllerTest extends ControllerTest {
                         fieldWithPath("article").type(JsonFieldType.OBJECT).description("게시글")
                     ).andWithPrefix("article.", ArticleFieldDescriptor.article)
                         .andWithPrefix("article.author.", ProfileFieldDescriptor.profile)
+                )
+            );
+    }
+
+    @DisplayName("게시글 전체 조회")
+    @Test
+    void findAll() throws Exception {
+        List<SingleArticleResponse> list = List.of(SingleArticleResponse.of(ARTICLE1, USER1),
+            SingleArticleResponse.of(ARTICLE2, USER1));
+        MultipleArticleResponse response = new MultipleArticleResponse(list);
+        given(articleService.findAll(any(ArticleSearchCondition.class), any(User.class)))
+            .willReturn(response);
+
+        ResultActions result = mockMvc.perform(
+            get("/api/articles")
+                .header(AUTHORIZATION_HEADER_NAME, AUTHORIZATION_HEADER_VALUE)
+                .queryParam("tag", TAG2.getName())
+                .queryParam("author", USER1.getUsername())
+        );
+
+        result.andExpect(status().isOk())
+            .andDo(
+                document("article/find-all",
+                    requestHeaders(
+                        headerWithName(AUTHORIZATION_HEADER_NAME).description("토큰").optional()
+                    ),
+                    requestParameters(
+                        parameterWithName("tag").description("태그").optional(),
+                        parameterWithName("author").description("작성자").optional(),
+                        parameterWithName("favorited").description("찜한 유저명").optional(),
+                        parameterWithName("limit").description("limit(20)").optional(),
+                        parameterWithName("offset").description("offset(0)").optional()
+                    ),
+                    responseFields(
+                        fieldWithPath("articles").type(JsonFieldType.ARRAY).description("게시글 목록")
+                    ).andWithPrefix("articles[].", ArticleFieldDescriptor.article)
+                        .andWithPrefix("articles[].author.", ProfileFieldDescriptor.profile)
                 )
             );
     }
