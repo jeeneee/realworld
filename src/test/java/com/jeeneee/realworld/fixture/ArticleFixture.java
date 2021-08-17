@@ -16,8 +16,8 @@ public class ArticleFixture {
         .description("Ever wonder how?")
         .body("You have to believe")
         .author(USER1)
-        .createdAt(LocalDateTime.now())
-        .updatedAt(LocalDateTime.now())
+        .createdAt(LocalDateTime.of(2021, 8, 16, 15, 10))
+        .updatedAt(LocalDateTime.of(2021, 8, 16, 15, 10))
         .build();
 
     public static Article ARTICLE2 = Article.builder()
@@ -25,8 +25,8 @@ public class ArticleFixture {
         .description("Ever wonder why?")
         .body("you must believe")
         .author(USER1)
-        .createdAt(LocalDateTime.now())
-        .updatedAt(LocalDateTime.now())
+        .createdAt(LocalDateTime.of(2021, 8, 16, 15, 10))
+        .updatedAt(LocalDateTime.of(2021, 8, 16, 15, 10))
         .build();
 
     public static final Tag TAG1 = Tag.create("reactjs");
@@ -36,8 +36,8 @@ public class ArticleFixture {
     static {
         ARTICLE1.addTag(TAG1);
         ARTICLE1.addTag(TAG2);
-        ARTICLE2.addTag(TAG1);
         ARTICLE2.addTag(TAG2);
+        ARTICLE2.addTag(TAG3);
     }
 
     public static final ArticleCreateRequest CREATE_REQUEST = ArticleCreateRequest.builder()
