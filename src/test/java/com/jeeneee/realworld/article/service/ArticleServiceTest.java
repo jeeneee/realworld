@@ -15,10 +15,13 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import com.jeeneee.realworld.article.domain.Article;
+import com.jeeneee.realworld.article.domain.ArticleQueryRepository;
 import com.jeeneee.realworld.article.domain.ArticleRepository;
 import com.jeeneee.realworld.article.domain.Slug;
 import com.jeeneee.realworld.article.dto.ArticleCreateRequest;
+import com.jeeneee.realworld.article.dto.ArticleSearchCondition;
 import com.jeeneee.realworld.article.dto.ArticleUpdateRequest;
+import com.jeeneee.realworld.article.dto.MultipleArticleResponse;
 import com.jeeneee.realworld.article.dto.SingleArticleResponse;
 import com.jeeneee.realworld.article.exception.ArticleNotFoundException;
 import com.jeeneee.realworld.article.exception.DuplicateSlugException;
@@ -43,6 +46,9 @@ class ArticleServiceTest {
     private ArticleRepository articleRepository;
 
     @Mock
+    private ArticleQueryRepository articleQueryRepository;
+
+    @Mock
     private TagService tagService;
 
     private ArticleService articleService;
@@ -54,7 +60,7 @@ class ArticleServiceTest {
 
     @BeforeEach
     void setUp() {
-        articleService = new ArticleService(articleRepository, tagService);
+        articleService = new ArticleService(articleRepository, articleQueryRepository, tagService);
 
         tagList = List.of("reactjs", "angularjs");
         tags = tagList.stream().map(Tag::create).collect(Collectors.toList());
@@ -201,5 +207,18 @@ class ArticleServiceTest {
         articleService.delete(article.getSlugValue(), author);
 
         verify(articleRepository, times(1)).delete(article);
+    }
+
+    @DisplayName("게시글 전체 조회")
+    @Test
+    void findAll_Normal_Success() {
+        ArticleSearchCondition condition = new ArticleSearchCondition("reactjs", "jeeneee",
+            "jeeneee", 20, 0);
+        given(articleQueryRepository.findAll(any(ArticleSearchCondition.class)))
+            .willReturn(List.of(article));
+
+        MultipleArticleResponse response = articleService.findAll(condition, author);
+
+        assertThat(response.getArticles()).hasSize(1);
     }
 }

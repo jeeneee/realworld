@@ -1,10 +1,13 @@
 package com.jeeneee.realworld.article.service;
 
 import com.jeeneee.realworld.article.domain.Article;
+import com.jeeneee.realworld.article.domain.ArticleQueryRepository;
 import com.jeeneee.realworld.article.domain.ArticleRepository;
 import com.jeeneee.realworld.article.domain.Slug;
 import com.jeeneee.realworld.article.dto.ArticleCreateRequest;
+import com.jeeneee.realworld.article.dto.ArticleSearchCondition;
 import com.jeeneee.realworld.article.dto.ArticleUpdateRequest;
+import com.jeeneee.realworld.article.dto.MultipleArticleResponse;
 import com.jeeneee.realworld.article.dto.SingleArticleResponse;
 import com.jeeneee.realworld.article.exception.ArticleNotFoundException;
 import com.jeeneee.realworld.article.exception.DuplicateSlugException;
@@ -14,6 +17,7 @@ import com.jeeneee.realworld.tag.service.TagService;
 import com.jeeneee.realworld.user.domain.User;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +28,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
+    private final ArticleQueryRepository articleQueryRepository;
     private final TagService tagService;
 
     @Transactional
@@ -57,6 +62,12 @@ public class ArticleService {
     public Article getArticle(String slug) {
         return articleRepository.findBySlug_Value(slug)
             .orElseThrow(ArticleNotFoundException::new);
+    }
+
+    public MultipleArticleResponse findAll(ArticleSearchCondition condition, User user) {
+        return new MultipleArticleResponse(articleQueryRepository.findAll(condition).stream()
+            .map(article -> SingleArticleResponse.of(article, user))
+            .collect(Collectors.toList()));
     }
 
     private void verifyAuthor(User author, Article article) {
