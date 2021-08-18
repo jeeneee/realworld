@@ -6,6 +6,7 @@ import com.jeeneee.realworld.article.domain.Article;
 import com.jeeneee.realworld.common.domain.BaseTimeEntity;
 import com.jeeneee.realworld.common.exception.IllegalParameterException;
 import com.jeeneee.realworld.user.domain.User;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,7 +45,9 @@ public class Comment extends BaseTimeEntity {
     private Article article;
 
     @Builder
-    private Comment(Long id, String body, User author, Article article) {
+    private Comment(Long id, String body, User author, Article article, LocalDateTime createdAt,
+        LocalDateTime updatedAt) {
+        super(createdAt, updatedAt);
         validateParams(body, author, article);
         this.id = id;
         this.body = body;
