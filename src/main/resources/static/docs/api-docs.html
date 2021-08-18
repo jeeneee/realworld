@@ -573,6 +573,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_응답_예시_12">응답 예시</a></li>
 </ul>
 </li>
+<li><a href="#article-feed">게시글 피드 조회</a>
+<ul class="sectlevel3">
+<li><a href="#_get_apiarticlesfeed">GET /api/articles/feed</a></li>
+<li><a href="#_요청_헤더_11">요청 헤더</a></li>
+<li><a href="#_요청_파라미터_2">요청 파라미터</a></li>
+<li><a href="#_응답_필드_12">응답 필드</a></li>
+<li><a href="#_요청_예시_13">요청 예시</a></li>
+<li><a href="#_응답_예시_13">응답 예시</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1983,7 +1993,7 @@ Content-Type: application/json;charset=UTF-8
     "title" : "Did you train your dragon?",
     "description" : "Ever wonder why?",
     "body" : "you must believe",
-    "tagList" : [ "java", "angularjs" ],
+    "tagList" : [ "angularjs", "java" ],
     "createdAt" : "2021-08-16T15:10:00",
     "updatedAt" : "2021-08-16T15:10:00",
     "favorited" : false,
@@ -2054,7 +2064,7 @@ Authorization: Token abc.def.ghi</code></pre>
 <div class="sect3">
 <h4 id="_get_apiarticlesslug"><a class="link" href="#_get_apiarticlesslug">GET /api/articles/{slug}</a></h4>
 <div class="paragraph">
-<p>요청한 슬러그에 해당하는 게시글을 응답한다.</p>
+<p>요청한 슬러그에 해당하는 게시글을 조회한다.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2213,7 +2223,7 @@ Content-Type: application/json;charset=UTF-8
 <div class="sect3">
 <h4 id="_get_apiarticlesparams"><a class="link" href="#_get_apiarticlesparams">GET /api/articles?[params]</a></h4>
 <div class="paragraph">
-<p>요청 파라미터에 해당하는 모든 게시글을 조회한다.</p>
+<p>요청 파라미터에 해당하는 모든 게시글을 최신순으로 조회한다.</p>
 </div>
 </div>
 <div class="sect3">
@@ -2410,7 +2420,7 @@ Content-Type: application/json;charset=UTF-8
     "title" : "Did you train your dragon?",
     "description" : "Ever wonder why?",
     "body" : "you must believe",
-    "tagList" : [ "java", "angularjs" ],
+    "tagList" : [ "angularjs", "java" ],
     "createdAt" : "2021-08-16T15:10:00",
     "updatedAt" : "2021-08-16T15:10:00",
     "favorited" : false,
@@ -2426,13 +2436,216 @@ Content-Type: application/json;charset=UTF-8
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="article-feed"><a class="link" href="#article-feed">게시글 피드 조회</a></h3>
+<div class="sect3">
+<h4 id="_get_apiarticlesfeed"><a class="link" href="#_get_apiarticlesfeed">GET /api/articles/feed</a></h4>
+<div class="paragraph">
+<p>팔로우한 유저의 게시글을 최신순으로 조회한다.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_요청_헤더_11"><a class="link" href="#_요청_헤더_11">요청 헤더</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">헤더명</th>
+<th class="tableblock halign-left valign-top">필수값</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">true</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">토큰</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_요청_파라미터_2"><a class="link" href="#_요청_파라미터_2">요청 파라미터</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">파라미터명</th>
+<th class="tableblock halign-left valign-top">필수값</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>limit</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">limit(20)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>offset</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">offset(0)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_응답_필드_12"><a class="link" href="#_응답_필드_12">응답 필드</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시글 목록</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].slug</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">슬러그</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].title</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">제목</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].description</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요약</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].body</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">내용</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].tagList</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">태그</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].createdAt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">생성일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].updatedAt</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">수정일</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].favorited</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].author</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">작성자 프로필</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].author.username</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">유저명</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].author.bio</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">자기소개</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].author.image</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">이미지</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].author.following</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">팔로잉 여부</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_요청_예시_13"><a class="link" href="#_요청_예시_13">요청 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/articles/feed?limit=20&amp;offset=0 HTTP/1.1
+Authorization: Token abc.def.ghi</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_응답_예시_13"><a class="link" href="#_응답_예시_13">응답 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "articles" : [ {
+    "slug" : "how-to-train-your-dragon",
+    "title" : "How to train your dragon",
+    "description" : "Ever wonder how?",
+    "body" : "You have to believe",
+    "tagList" : [ "reactjs", "angularjs" ],
+    "createdAt" : "2021-08-16T15:10:00",
+    "updatedAt" : "2021-08-16T15:10:00",
+    "favorited" : false,
+    "author" : {
+      "username" : "username",
+      "bio" : "반갑습니다.",
+      "image" : "https://avatars.githubusercontent.com/u/23521870?v=4",
+      "following" : true
+    }
+  }, {
+    "slug" : "did-you-train-your-dragon",
+    "title" : "Did you train your dragon?",
+    "description" : "Ever wonder why?",
+    "body" : "you must believe",
+    "tagList" : [ "angularjs", "java" ],
+    "createdAt" : "2021-08-16T15:10:00",
+    "updatedAt" : "2021-08-16T15:10:00",
+    "favorited" : false,
+    "author" : {
+      "username" : "username",
+      "bio" : "반갑습니다.",
+      "image" : "https://avatars.githubusercontent.com/u/23521870?v=4",
+      "following" : true
+    }
+  } ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2021-08-18 01:55:58 +0900
+Last updated 2021-08-18 16:26:36 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

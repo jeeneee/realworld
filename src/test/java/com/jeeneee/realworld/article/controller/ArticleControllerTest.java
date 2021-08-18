@@ -6,6 +6,7 @@ import static com.jeeneee.realworld.fixture.ArticleFixture.CREATE_REQUEST;
 import static com.jeeneee.realworld.fixture.ArticleFixture.TAG2;
 import static com.jeeneee.realworld.fixture.ArticleFixture.UPDATE_REQUEST;
 import static com.jeeneee.realworld.fixture.UserFixture.USER1;
+import static com.jeeneee.realworld.fixture.UserFixture.USER2;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
@@ -194,5 +195,41 @@ class ArticleControllerTest extends ControllerTest {
                         .andWithPrefix("articles[].author.", ProfileFieldDescriptor.profile)
                 )
             );
+    }
+
+    @DisplayName("게시글 피드 조회")
+    @Test
+    void feed() throws Exception {
+        USER2.follow(USER1);
+        List<SingleArticleResponse> list = List.of(SingleArticleResponse.of(ARTICLE1, USER2),
+            SingleArticleResponse.of(ARTICLE2, USER2));
+        MultipleArticleResponse response = new MultipleArticleResponse(list);
+        given(articleService.findFeedArticles(any(ArticleSearchCondition.class), any(User.class)))
+            .willReturn(response);
+
+        ResultActions result = mockMvc.perform(
+            get("/api/articles/feed")
+                .header(AUTHORIZATION_HEADER_NAME, AUTHORIZATION_HEADER_VALUE)
+                .queryParam("limit", "20")
+                .queryParam("offset", "0")
+        );
+
+        result.andExpect(status().isOk())
+            .andDo(
+                document("article/feed",
+                    requestHeaders(
+                        headerWithName(AUTHORIZATION_HEADER_NAME).description("토큰")
+                    ),
+                    requestParameters(
+                        parameterWithName("limit").description("limit(20)").optional(),
+                        parameterWithName("offset").description("offset(0)").optional()
+                    ),
+                    responseFields(
+                        fieldWithPath("articles").type(JsonFieldType.ARRAY).description("게시글 목록")
+                    ).andWithPrefix("articles[].", ArticleFieldDescriptor.article)
+                        .andWithPrefix("articles[].author.", ProfileFieldDescriptor.profile)
+                )
+            );
+        USER2.unfollow(USER1);
     }
 }

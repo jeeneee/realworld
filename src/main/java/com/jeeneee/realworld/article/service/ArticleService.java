@@ -19,9 +19,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
@@ -66,6 +68,14 @@ public class ArticleService {
 
     public MultipleArticleResponse findAll(ArticleSearchCondition condition, User user) {
         return new MultipleArticleResponse(articleQueryRepository.findAll(condition).stream()
+            .map(article -> SingleArticleResponse.of(article, user))
+            .collect(Collectors.toList()));
+    }
+
+    public MultipleArticleResponse findFeedArticles(ArticleSearchCondition condition, User user) {
+        List<Long> followIds = user.getFollows().stream()
+            .map(User::getId).collect(Collectors.toList());
+        return new MultipleArticleResponse(articleQueryRepository.findFeedArticles(condition, followIds).stream()
             .map(article -> SingleArticleResponse.of(article, user))
             .collect(Collectors.toList()));
     }
