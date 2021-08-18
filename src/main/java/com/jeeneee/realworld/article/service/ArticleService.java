@@ -80,6 +80,20 @@ public class ArticleService {
             .collect(Collectors.toList()));
     }
 
+    @Transactional
+    public SingleArticleResponse favorite(String slug, User user) {
+        Article article = getArticle(slug);
+        article.favorite(user);
+        return SingleArticleResponse.of(article, user);
+    }
+
+    @Transactional
+    public SingleArticleResponse unfavorite(String slug, User user) {
+        Article article = getArticle(slug);
+        article.unfavorite(user);
+        return SingleArticleResponse.of(article, user);
+    }
+
     private void verifyAuthor(User author, Article article) {
         if (article.getAuthor() != author) {
             throw new BadRequestException("Only the author can fulfill this request.");

@@ -2,6 +2,7 @@ package com.jeeneee.realworld.article.service;
 
 import static com.jeeneee.realworld.article.domain.ArticleTest.ARTICLE_BODY;
 import static com.jeeneee.realworld.article.domain.ArticleTest.ARTICLE_DESCRIPTION;
+import static com.jeeneee.realworld.article.domain.ArticleTest.ARTICLE_SLUG;
 import static com.jeeneee.realworld.article.domain.ArticleTest.ARTICLE_TITLE;
 import static com.jeeneee.realworld.user.domain.UserTest.EMAIL;
 import static com.jeeneee.realworld.user.domain.UserTest.PASSWORD;
@@ -242,5 +243,44 @@ class ArticleServiceTest {
         MultipleArticleResponse response = articleService.findFeedArticles(condition, author);
 
         assertThat(response.getArticles()).hasSize(1);
+    }
+
+    @DisplayName("게시글 찜하기 - 해당 게시글이 존재하지 않으면 예외 발생")
+    @Test
+    void favorite_ArticleNotExists_ExceptionThrown() {
+        given(articleRepository.findBySlug_Value(any())).willReturn(Optional.empty());
+
+        assertThatThrownBy(() -> articleService.favorite(ARTICLE_SLUG, author))
+            .isInstanceOf(ArticleNotFoundException.class);
+    }
+
+    @DisplayName("게시글 찜하기")
+    @Test
+    void favorite_Normal_Success() {
+        given(articleRepository.findBySlug_Value(any())).willReturn(Optional.of(article));
+
+        SingleArticleResponse response = articleService.favorite(ARTICLE_SLUG, author);
+
+        assertThat(response.isFavorited()).isTrue();
+    }
+
+    @DisplayName("게시글 찜하기 취소 - 해당 게시글이 존재하지 않으면 예외 발생")
+    @Test
+    void unfavorite_ArticleNotExists_ExceptionThrown() {
+        given(articleRepository.findBySlug_Value(any())).willReturn(Optional.empty());
+
+        assertThatThrownBy(() -> articleService.unfavorite(ARTICLE_SLUG, author))
+            .isInstanceOf(ArticleNotFoundException.class);
+    }
+
+    @DisplayName("게시글 찜하기 취소")
+    @Test
+    void unfavorite_Normal_Success() {
+        article.favorite(author);
+        given(articleRepository.findBySlug_Value(any())).willReturn(Optional.of(article));
+
+        SingleArticleResponse response = articleService.unfavorite(ARTICLE_SLUG, author);
+
+        assertThat(response.isFavorited()).isFalse();
     }
 }

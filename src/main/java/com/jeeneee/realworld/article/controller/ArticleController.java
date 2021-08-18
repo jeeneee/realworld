@@ -78,4 +78,16 @@ public class ArticleController {
         var condition = new ArticleSearchCondition(limit, offset);
         return ResponseEntity.ok().body(articleService.findFeedArticles(condition, user));
     }
+
+    @PostMapping("/{slug}/favorite")
+    public ResponseEntity<SingleArticleResponse> favorite(@PathVariable String slug,
+        @LoginUser User user) {
+        return ResponseEntity.ok().body(articleService.favorite(slug, user));
+    }
+
+    @DeleteMapping("/{slug}/favorite")
+    public ResponseEntity<SingleArticleResponse> unfavorite(@PathVariable String slug,
+        @LoginUser User user) {
+        return ResponseEntity.ok().body(articleService.unfavorite(slug, user));
+    }
 }
