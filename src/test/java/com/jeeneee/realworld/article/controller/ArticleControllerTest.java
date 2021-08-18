@@ -232,4 +232,56 @@ class ArticleControllerTest extends ControllerTest {
             );
         USER2.unfollow(USER1);
     }
+
+    @DisplayName("게시글 찜하기")
+    @Test
+    void favorite() throws Exception {
+        ARTICLE1.favorite(USER1);
+        SingleArticleResponse response = SingleArticleResponse.of(ARTICLE1, USER1);
+        given(articleService.favorite(any(), any(User.class))).willReturn(response);
+
+        ResultActions result = mockMvc.perform(
+            post("/api/articles/{slug}/favorite", ARTICLE1.getSlugValue())
+                .header(AUTHORIZATION_HEADER_NAME, AUTHORIZATION_HEADER_VALUE)
+        );
+
+        result.andExpect(status().isOk())
+            .andDo(
+                document("article/favorite",
+                    requestHeaders(
+                        headerWithName(AUTHORIZATION_HEADER_NAME).description("토큰")
+                    ),
+                    responseFields(
+                        fieldWithPath("article").type(JsonFieldType.OBJECT).description("게시글")
+                    ).andWithPrefix("article.", ArticleFieldDescriptor.article)
+                        .andWithPrefix("article.author.", ProfileFieldDescriptor.profile)
+                )
+            );
+        ARTICLE1.unfavorite(USER1);
+    }
+
+    @DisplayName("게시글 찜하기 취소")
+    @Test
+    void unfavorite() throws Exception {
+        SingleArticleResponse response = SingleArticleResponse.of(ARTICLE1, USER1);
+        given(articleService.unfavorite(any(), any(User.class))).willReturn(response);
+
+        ResultActions result = mockMvc.perform(
+            delete("/api/articles/{slug}/favorite", ARTICLE1.getSlugValue())
+                .header(AUTHORIZATION_HEADER_NAME, AUTHORIZATION_HEADER_VALUE)
+        );
+
+        result.andExpect(status().isOk())
+            .andDo(
+                document("article/unfavorite",
+                    requestHeaders(
+                        headerWithName(AUTHORIZATION_HEADER_NAME).description("토큰")
+                    ),
+                    responseFields(
+                        fieldWithPath("article").type(JsonFieldType.OBJECT).description("게시글")
+                    ).andWithPrefix("article.", ArticleFieldDescriptor.article)
+                        .andWithPrefix("article.author.", ProfileFieldDescriptor.profile)
+                )
+            );
+    }
 }

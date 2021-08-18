@@ -79,8 +79,6 @@ Users of the API should not create URIs themselves, instead they should use the 
 [[user-register]]
 === 회원가입
 
-==== POST /api/users
-
 유저명, 이메일, 비밀번호만으로 회원가입을 할 수 있다.
 회원가입에 성공한 경우, 해당 회원 정보를 응답한다.
 
@@ -102,8 +100,6 @@ include::{snippets}/user/register/http-response.adoc[]
 
 [[user-login]]
 === 로그인
-
-==== POST /api/users/login
 
 이메일, 비밀번호로 로그인 할 수 있다.
 로그인에 성공한 경우, 토큰을 발행하고 해당 회원 정보를 응답한다.
@@ -127,8 +123,6 @@ include::{snippets}/user/login/http-response.adoc[]
 [[user-find-my-info]]
 === 개인 정보 조회
 
-==== GET /api/user
-
 이메일, 비밀번호로 로그인 할 수 있다.
 로그인에 성공한 경우, 토큰을 발행하고 해당 회원 정보를 응답한다.
 
@@ -150,8 +144,6 @@ include::{snippets}/user/find-my-info/http-response.adoc[]
 
 [[user-update]]
 === 개인 정보 수정
-
-==== PUT /api/user
 
 수정할 회원 정보를 요청하면 해당 회원의 개인 정보를 수정한다.
 
@@ -188,8 +180,6 @@ include::{snippets}/user/update/http-response.adoc[]
 [[profile-find-user]]
 === 회원 정보 조회
 
-==== GET /api/profiles/{username}
-
 유저명으로 회원 프로필을 조회한다.
 
 ==== 요청 헤더
@@ -211,8 +201,6 @@ include::{snippets}/profile/find-user/http-response.adoc[]
 [[profile-follow]]
 === 팔로우
 
-==== POST /api/profiles/{username}/follow
-
 유저명으로 회원을 팔로우한다.
 
 ==== 요청 헤더
@@ -233,8 +221,6 @@ include::{snippets}/profile/follow/http-response.adoc[]
 
 [[profile-unfollow]]
 === 언팔로우
-
-==== DELETE /api/profiles/{username}/follow
 
 유저명으로 회원을 언팔로우한다.
 
@@ -262,8 +248,6 @@ include::{snippets}/profile/unfollow/http-response.adoc[]
 [[article-create]]
 === 게시글 생성
 
-==== POST /api/articles
-
 게시글 생성에 성공하면 해당 게시글 정보를 응답한다.
 
 ==== 요청 헤더
@@ -288,8 +272,6 @@ include::{snippets}/article/create/http-response.adoc[]
 
 [[article-update]]
 === 게시글 수정
-
-==== PUT /api/articles/{slug}
 
 게시글 수정에 성공하면 해당 게시글 정보를 응답한다.
 
@@ -316,8 +298,6 @@ include::{snippets}/article/update/http-response.adoc[]
 [[article-delete]]
 === 게시글 삭제
 
-==== DELETE /api/articles/{slug}
-
 게시글 삭제에 성공하면 HTTP 204 No Content 상태 코드를 응답한다.
 
 ==== 요청 헤더
@@ -334,8 +314,6 @@ include::{snippets}/article/delete/http-response.adoc[]
 
 [[article-find-one-by-slug]]
 === 게시글 단일 조회
-
-==== GET /api/articles/{slug}
 
 요청한 슬러그에 해당하는 게시글을 조회한다.
 
@@ -357,8 +335,6 @@ include::{snippets}/article/find-one-by-slug/http-response.adoc[]
 
 [[article-find-all]]
 === 게시글 전체 조회
-
-==== GET /api/articles?[params]
 
 요청 파라미터에 해당하는 모든 게시글을 최신순으로 조회한다.
 
@@ -385,8 +361,6 @@ include::{snippets}/article/find-all/http-response.adoc[]
 [[article-feed]]
 === 게시글 피드 조회
 
-==== GET /api/articles/feed
-
 팔로우한 유저의 게시글을 최신순으로 조회한다.
 
 ==== 요청 헤더
@@ -408,3 +382,47 @@ include::{snippets}/article/feed/http-request.adoc[]
 ==== 응답 예시
 
 include::{snippets}/article/feed/http-response.adoc[]
+
+[[article-favorite]]
+=== 게시글 찜하기
+
+요청한 슬러그에 해당하는 게시글을 찜한다.
+성공하면 해당 게시글을 응답한다.
+
+==== 요청 헤더
+
+include::{snippets}/article/favorite/request-headers.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/article/favorite/response-fields.adoc[]
+
+==== 요청 예시
+
+include::{snippets}/article/favorite/http-request.adoc[]
+
+==== 응답 예시
+
+include::{snippets}/article/favorite/http-response.adoc[]
+
+[[article-unfavorite]]
+=== 게시글 찜하기 취소
+
+요청한 슬러그에 해당하는 게시글을 이미 찜했다면 취소한다.
+성공하면 해당 게시글을 응답한다.
+
+==== 요청 헤더
+
+include::{snippets}/article/unfavorite/request-headers.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/article/unfavorite/response-fields.adoc[]
+
+==== 요청 예시
+
+include::{snippets}/article/unfavorite/http-request.adoc[]
+
+==== 응답 예시
+
+include::{snippets}/article/unfavorite/http-response.adoc[]
