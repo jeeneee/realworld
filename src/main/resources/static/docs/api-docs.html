@@ -452,7 +452,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel1">
 <li><a href="#overview-http-verbs">HTTP verbs</a></li>
 <li><a href="#overview-hypermedia">Hypermedia</a></li>
-<li><a href="#user">User</a>
+<li><a href="#user">USER</a>
 <ul class="sectlevel2">
 <li><a href="#user-register">회원가입</a>
 <ul class="sectlevel3">
@@ -489,7 +489,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="#profile">Profile</a>
+<li><a href="#profile">PROFILE</a>
 <ul class="sectlevel2">
 <li><a href="#profile-find-user">회원 정보 조회</a>
 <ul class="sectlevel3">
@@ -517,7 +517,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </li>
-<li><a href="#article">Article</a>
+<li><a href="#article">ARTICLE</a>
 <ul class="sectlevel2">
 <li><a href="#article-create">게시글 생성</a>
 <ul class="sectlevel3">
@@ -586,6 +586,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_응답_예시_15">응답 예시</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#comment">COMMENT</a>
+<ul class="sectlevel2">
 <li><a href="#comment-create">댓글 생성</a>
 <ul class="sectlevel3">
 <li><a href="#_요청_헤더_14">요청 헤더</a></li>
@@ -608,6 +612,18 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_응답_필드_16">응답 필드</a></li>
 <li><a href="#_요청_예시_18">요청 예시</a></li>
 <li><a href="#_응답_예시_18">응답 예시</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#tag">TAG</a>
+<ul class="sectlevel2">
+<li><a href="#tag-find-all">태그 전체 조회</a>
+<ul class="sectlevel3">
+<li><a href="#_요청_헤더_17">요청 헤더</a></li>
+<li><a href="#_응답_필드_17">응답 필드</a></li>
+<li><a href="#_요청_예시_19">요청 예시</a></li>
+<li><a href="#_응답_예시_19">응답 예시</a></li>
 </ul>
 </li>
 </ul>
@@ -715,7 +731,7 @@ Users of the API should not create URIs themselves, instead they should use the 
 </div>
 </div>
 <div class="sect1">
-<h2 id="user"><a class="link" href="#user">User</a></h2>
+<h2 id="user"><a class="link" href="#user">USER</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>회원가입, 로그인, 개인정보 수정</p>
@@ -1275,7 +1291,7 @@ Content-Type: application/json;charset=UTF-8
 </div>
 </div>
 <div class="sect1">
-<h2 id="profile"><a class="link" href="#profile">Profile</a></h2>
+<h2 id="profile"><a class="link" href="#profile">PROFILE</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>회원 정보 조회, 팔로우, 언팔로우</p>
@@ -1586,10 +1602,10 @@ Content-Type: application/json;charset=UTF-8
 </div>
 </div>
 <div class="sect1">
-<h2 id="article"><a class="link" href="#article">Article</a></h2>
+<h2 id="article"><a class="link" href="#article">ARTICLE</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>게시글 생성, 수정, 삭제, 단일 조회</p>
+<p>게시글 생성, 수정, 삭제, 단일 조회, 전체 조회, 피드 조회, 찜하기, 찜하기 취소</p>
 </div>
 <div class="sect2">
 <h3 id="article-create"><a class="link" href="#article-create">게시글 생성</a></h3>
@@ -1788,7 +1804,7 @@ Content-Type: application/json;charset=UTF-8
     "title" : "How to train your dragon",
     "description" : "Ever wonder how?",
     "body" : "You have to believe",
-    "tagList" : [ "angularjs", "reactjs" ],
+    "tagList" : [ "reactjs", "angularjs" ],
     "createdAt" : "2021-08-16T15:10:00",
     "updatedAt" : "2021-08-16T15:10:00",
     "favorited" : false,
@@ -2196,7 +2212,7 @@ Content-Type: application/json;charset=UTF-8
     "title" : "How to train your dragon",
     "description" : "Ever wonder how?",
     "body" : "You have to believe",
-    "tagList" : [ "angularjs", "reactjs" ],
+    "tagList" : [ "reactjs", "angularjs" ],
     "createdAt" : "2021-08-16T15:10:00",
     "updatedAt" : "2021-08-16T15:10:00",
     "favorited" : false,
@@ -2396,7 +2412,7 @@ Content-Type: application/json;charset=UTF-8
     "title" : "How to train your dragon",
     "description" : "Ever wonder how?",
     "body" : "You have to believe",
-    "tagList" : [ "angularjs", "reactjs" ],
+    "tagList" : [ "reactjs", "angularjs" ],
     "createdAt" : "2021-08-16T15:10:00",
     "updatedAt" : "2021-08-16T15:10:00",
     "favorited" : false,
@@ -2596,7 +2612,7 @@ Content-Type: application/json;charset=UTF-8
     "title" : "How to train your dragon",
     "description" : "Ever wonder how?",
     "body" : "You have to believe",
-    "tagList" : [ "angularjs", "reactjs" ],
+    "tagList" : [ "reactjs", "angularjs" ],
     "createdAt" : "2021-08-16T15:10:00",
     "updatedAt" : "2021-08-16T15:10:00",
     "favorited" : false,
@@ -2768,7 +2784,7 @@ Content-Type: application/json;charset=UTF-8
     "title" : "How to train your dragon",
     "description" : "Ever wonder how?",
     "body" : "You have to believe",
-    "tagList" : [ "angularjs", "reactjs" ],
+    "tagList" : [ "reactjs", "angularjs" ],
     "createdAt" : "2021-08-16T15:10:00",
     "updatedAt" : "2021-08-16T15:10:00",
     "favorited" : true,
@@ -2925,7 +2941,7 @@ Content-Type: application/json;charset=UTF-8
     "title" : "How to train your dragon",
     "description" : "Ever wonder how?",
     "body" : "You have to believe",
-    "tagList" : [ "angularjs", "reactjs" ],
+    "tagList" : [ "reactjs", "angularjs" ],
     "createdAt" : "2021-08-16T15:10:00",
     "updatedAt" : "2021-08-16T15:10:00",
     "favorited" : false,
@@ -2940,6 +2956,14 @@ Content-Type: application/json;charset=UTF-8
 </div>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="comment"><a class="link" href="#comment">COMMENT</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>댓글 생성, 삭제, 전체 조회</p>
 </div>
 <div class="sect2">
 <h3 id="comment-create"><a class="link" href="#comment-create">댓글 생성</a></h3>
@@ -3301,11 +3325,95 @@ Content-Type: application/json;charset=UTF-8
 </div>
 </div>
 </div>
+<div class="sect1">
+<h2 id="tag"><a class="link" href="#tag">TAG</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>태그 전체 조회</p>
+</div>
+<div class="sect2">
+<h3 id="tag-find-all"><a class="link" href="#tag-find-all">태그 전체 조회</a></h3>
+<div class="paragraph">
+<p>모든 태그를 조회한다.</p>
+</div>
+<div class="sect3">
+<h4 id="_요청_헤더_17"><a class="link" href="#_요청_헤더_17">요청 헤더</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">헤더명</th>
+<th class="tableblock halign-left valign-top">필수값</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Authorization</code></p></td>
+<td class="tableblock halign-left valign-top"></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">토큰</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_응답_필드_17"><a class="link" href="#_응답_필드_17">응답 필드</a></h4>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">필드명</th>
+<th class="tableblock halign-left valign-top">타입</th>
+<th class="tableblock halign-left valign-top">설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>tags</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Array</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">태그 목록</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_요청_예시_19"><a class="link" href="#_요청_예시_19">요청 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">GET /api/tags HTTP/1.1
+Authorization: Token abc.def.ghi</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_응답_예시_19"><a class="link" href="#_응답_예시_19">응답 예시</a></h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code data-lang="http" class="language-http hljs">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+
+{
+  "tags" : [ "reactjs", "angularjs" ]
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2021-08-18 21:04:23 +0900
+Last updated 2021-08-18 21:39:08 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">
