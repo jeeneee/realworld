@@ -69,4 +69,13 @@ public class ArticleController {
         var condition = new ArticleSearchCondition(tag, author, favorited, limit, offset);
         return ResponseEntity.ok().body(articleService.findAll(condition, user));
     }
+
+    @GetMapping("/feed")
+    public ResponseEntity<MultipleArticleResponse> feed(
+        @RequestParam(defaultValue = "0") int offset,
+        @RequestParam(defaultValue = "20") int limit,
+        @LoginUser User user) {
+        var condition = new ArticleSearchCondition(limit, offset);
+        return ResponseEntity.ok().body(articleService.findFeedArticles(condition, user));
+    }
 }

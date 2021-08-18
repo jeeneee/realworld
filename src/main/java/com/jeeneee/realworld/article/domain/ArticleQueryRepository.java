@@ -7,8 +7,10 @@ import static com.jeeneee.realworld.user.domain.QUser.user;
 import com.jeeneee.realworld.article.dto.ArticleSearchCondition;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import java.util.Collections;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +21,8 @@ public class ArticleQueryRepository {
     private final JPAQueryFactory queryFactory;
 
     public List<Article> findAll(ArticleSearchCondition condition) {
-        return queryFactory.selectFrom(article)
+        return queryFactory.selectDistinct(article)
+            .from(article)
             .leftJoin(article.author, user)
             .leftJoin(article.favorites, user)
             .leftJoin(article.tags, tag)
@@ -28,6 +31,19 @@ public class ArticleQueryRepository {
                 eqFavorite(condition.getFavorited()),
                 eqTag(condition.getTag())
             )
+            .limit(condition.getLimit())
+            .offset(condition.getOffset())
+            .orderBy(article.createdAt.desc())
+            .fetch();
+    }
+
+    public List<Article> findFeedArticles(ArticleSearchCondition condition, List<Long> followIds) {
+        if (ObjectUtils.isEmpty(followIds)) {
+            return Collections.emptyList();
+        }
+        return queryFactory.selectDistinct(article)
+            .from(article)
+            .join(article.author, user).on(article.author.id.in(followIds))
             .limit(condition.getLimit())
             .offset(condition.getOffset())
             .orderBy(article.createdAt.desc())

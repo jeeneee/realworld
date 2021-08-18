@@ -337,7 +337,7 @@ include::{snippets}/article/delete/http-response.adoc[]
 
 ==== GET /api/articles/{slug}
 
-요청한 슬러그에 해당하는 게시글을 응답한다.
+요청한 슬러그에 해당하는 게시글을 조회한다.
 
 ==== 요청 헤더
 
@@ -360,7 +360,7 @@ include::{snippets}/article/find-one-by-slug/http-response.adoc[]
 
 ==== GET /api/articles?[params]
 
-요청 파라미터에 해당하는 모든 게시글을 조회한다.
+요청 파라미터에 해당하는 모든 게시글을 최신순으로 조회한다.
 
 ==== 요청 헤더
 
@@ -381,3 +381,30 @@ include::{snippets}/article/find-all/http-request.adoc[]
 ==== 응답 예시
 
 include::{snippets}/article/find-all/http-response.adoc[]
+
+[[article-feed]]
+=== 게시글 피드 조회
+
+==== GET /api/articles/feed
+
+팔로우한 유저의 게시글을 최신순으로 조회한다.
+
+==== 요청 헤더
+
+include::{snippets}/article/feed/request-headers.adoc[]
+
+==== 요청 파라미터
+
+include::{snippets}/article/feed/request-parameters.adoc[]
+
+==== 응답 필드
+
+include::{snippets}/article/feed/response-fields.adoc[]
+
+==== 요청 예시
+
+include::{snippets}/article/feed/http-request.adoc[]
+
+==== 응답 예시
+
+include::{snippets}/article/feed/http-response.adoc[]

@@ -221,4 +221,26 @@ class ArticleServiceTest {
 
         assertThat(response.getArticles()).hasSize(1);
     }
+
+    @DisplayName("게시글 피드 조회 - 팔로우한 유저가 없는 경우 비어있는 리스트 반환")
+    @Test
+    void findFeedArticles_NoFolllowing_EmptyList() {
+        ArticleSearchCondition condition = new ArticleSearchCondition(20, 0);
+
+        MultipleArticleResponse response = articleService.findFeedArticles(condition, author);
+
+        assertThat(response.getArticles()).isEmpty();
+    }
+
+    @DisplayName("게시글 피드 조회")
+    @Test
+    void findFeedArticles_HasFollowing_Success() {
+        ArticleSearchCondition condition = new ArticleSearchCondition(20, 0);
+        given(articleQueryRepository.findFeedArticles(any(ArticleSearchCondition.class), anyList()))
+            .willReturn(List.of(article));
+
+        MultipleArticleResponse response = articleService.findFeedArticles(condition, author);
+
+        assertThat(response.getArticles()).hasSize(1);
+    }
 }

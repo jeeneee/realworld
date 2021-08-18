@@ -26,4 +26,9 @@ public class ArticleSearchCondition {
         this.limit = limit;
         this.offset = offset;
     }
+
+    public ArticleSearchCondition(int limit, int offset) {
+        this.limit = limit;
+        this.offset = offset;
+    }
 }
