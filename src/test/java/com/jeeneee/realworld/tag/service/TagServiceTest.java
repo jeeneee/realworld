@@ -2,10 +2,12 @@ package com.jeeneee.realworld.tag.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.when;
 
 import com.jeeneee.realworld.tag.domain.Tag;
 import com.jeeneee.realworld.tag.domain.TagRepository;
+import com.jeeneee.realworld.tag.dto.MultipleTagResponse;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -60,5 +62,15 @@ class TagServiceTest {
         List<Tag> result = tagService.findOrSave(tagList);
 
         assertThat(result).containsAll(tags);
+    }
+
+    @DisplayName("태그 전체 조회")
+    @Test
+    void findAll_Normal_Success() {
+        given(tagRepository.findAll()).willReturn(tags);
+
+        MultipleTagResponse response = tagService.findAll();
+
+        assertThat(response.getTags()).containsAll(tagList);
     }
 }

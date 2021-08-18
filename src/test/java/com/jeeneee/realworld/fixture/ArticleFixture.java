@@ -1,11 +1,13 @@
 package com.jeeneee.realworld.fixture;
 
+import static com.jeeneee.realworld.fixture.TagFixture.TAG1;
+import static com.jeeneee.realworld.fixture.TagFixture.TAG2;
+import static com.jeeneee.realworld.fixture.TagFixture.TAG3;
 import static com.jeeneee.realworld.fixture.UserFixture.USER1;
 
 import com.jeeneee.realworld.article.domain.Article;
 import com.jeeneee.realworld.article.dto.ArticleCreateRequest;
 import com.jeeneee.realworld.article.dto.ArticleUpdateRequest;
-import com.jeeneee.realworld.tag.domain.Tag;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,10 +30,6 @@ public class ArticleFixture {
         .createdAt(LocalDateTime.of(2021, 8, 16, 15, 10))
         .updatedAt(LocalDateTime.of(2021, 8, 16, 15, 10))
         .build();
-
-    public static final Tag TAG1 = Tag.create("reactjs");
-    public static final Tag TAG2 = Tag.create("angularjs");
-    public static final Tag TAG3 = Tag.create("java");
 
     static {
         ARTICLE1.addTag(TAG1);

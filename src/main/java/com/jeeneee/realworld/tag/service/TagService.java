@@ -2,6 +2,7 @@ package com.jeeneee.realworld.tag.service;
 
 import com.jeeneee.realworld.tag.domain.Tag;
 import com.jeeneee.realworld.tag.domain.TagRepository;
+import com.jeeneee.realworld.tag.dto.MultipleTagResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,10 @@ public class TagService {
             .map(name -> tagRepository.findByName(name)
                 .orElseGet(() -> tagRepository.save(Tag.create(name))))
             .collect(Collectors.toList());
+    }
+
+    public MultipleTagResponse findAll() {
+        return new MultipleTagResponse(tagRepository.findAll().stream()
+            .map(Tag::getName).collect(Collectors.toList()));
     }
 }
