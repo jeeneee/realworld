@@ -35,7 +35,7 @@ public class ArticleController {
     public ResponseEntity<SingleArticleResponse> create(@LoginUser User author,
         @Valid @RequestBody ArticleCreateRequest request) {
         SingleArticleResponse response = articleService.save(request, author);
-        URI uri = URI.create("/api/articles/" + response.getSlug());
+        URI uri = URI.create("/api/articles/" + response.getArticle().getSlug());
         return ResponseEntity.created(uri).body(response);
     }
 

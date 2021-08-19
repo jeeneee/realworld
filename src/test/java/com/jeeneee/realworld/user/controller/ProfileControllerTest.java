@@ -1,5 +1,6 @@
 package com.jeeneee.realworld.user.controller;
 
+import static com.jeeneee.realworld.fixture.UserFixture.USER1;
 import static com.jeeneee.realworld.fixture.UserFixture.USER2;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -34,7 +35,7 @@ class ProfileControllerTest extends ControllerTest {
     @DisplayName("회원 프로필 조회")
     @Test
     void getProfile() throws Exception {
-        ProfileResponse response = ProfileResponse.of(USER2, false);
+        ProfileResponse response = ProfileResponse.of(USER2, USER1);
         given(profileService.find(any(), any(User.class))).willReturn(response);
 
         ResultActions result = mockMvc.perform(
@@ -58,7 +59,8 @@ class ProfileControllerTest extends ControllerTest {
     @DisplayName("팔로우")
     @Test
     void follow() throws Exception {
-        ProfileResponse response = ProfileResponse.of(USER2, true);
+        USER1.follow(USER2);
+        ProfileResponse response = ProfileResponse.of(USER2, USER1);
         given(profileService.follow(any(), any(User.class))).willReturn(response);
 
         ResultActions result = mockMvc.perform(
@@ -77,12 +79,13 @@ class ProfileControllerTest extends ControllerTest {
                     ).andWithPrefix("profile.", ProfileFieldDescriptor.profile)
                 )
             );
+        USER1.unfollow(USER2);
     }
 
     @DisplayName("언팔로우")
     @Test
     void unfollow() throws Exception {
-        ProfileResponse response = ProfileResponse.of(USER2, false);
+        ProfileResponse response = ProfileResponse.of(USER2, USER1);
         given(profileService.unfollow(any(), any(User.class))).willReturn(response);
 
         ResultActions result = mockMvc.perform(

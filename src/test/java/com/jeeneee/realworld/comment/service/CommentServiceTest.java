@@ -19,10 +19,11 @@ import com.jeeneee.realworld.comment.domain.Comment;
 import com.jeeneee.realworld.comment.domain.CommentRepository;
 import com.jeeneee.realworld.comment.dto.CommentCreateRequest;
 import com.jeeneee.realworld.comment.dto.MultipleCommentResponse;
-import com.jeeneee.realworld.comment.dto.SingleCommentResponse;
+import com.jeeneee.realworld.comment.dto.SingleCommentResponse.CommentInfo;
 import com.jeeneee.realworld.comment.exception.CommentNotFoundException;
 import com.jeeneee.realworld.common.exception.BadRequestException;
 import com.jeeneee.realworld.user.domain.User;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
@@ -61,12 +62,16 @@ class CommentServiceTest {
             .description(ARTICLE_DESCRIPTION)
             .body(ARTICLE_BODY)
             .author(author)
+            .createdAt(LocalDateTime.now())
+            .updatedAt(LocalDateTime.now())
             .build();
         comment = Comment.builder()
             .id(1L)
             .body(COMMENT_BODY)
             .author(author)
             .article(article)
+            .createdAt(LocalDateTime.now())
+            .updatedAt(LocalDateTime.now())
             .build();
     }
 
@@ -77,9 +82,9 @@ class CommentServiceTest {
         given(articleService.getArticle(any())).willReturn(article);
         given(commentRepository.save(any(Comment.class))).willReturn(comment);
 
-        SingleCommentResponse response = commentService.create(ARTICLE_SLUG, request, author);
+        CommentInfo commentInfo = commentService.create(ARTICLE_SLUG, request, author).getComment();
 
-        assertThat(response.getBody()).isEqualTo(request.getBody());
+        assertThat(commentInfo.getBody()).isEqualTo(request.getBody());
     }
 
     @DisplayName("댓글 삭제 - 해당 댓글이 존재하지 않는 경우 예외 발생")

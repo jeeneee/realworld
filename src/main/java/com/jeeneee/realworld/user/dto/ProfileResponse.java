@@ -1,6 +1,5 @@
 package com.jeeneee.realworld.user.dto;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
 import com.jeeneee.realworld.user.domain.User;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -9,33 +8,33 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@JsonRootName("profile")
 public class ProfileResponse {
 
-    private String username;
-    private String bio;
-    private String image;
-    private boolean following;
+    private ProfileInfo profile;
 
     public static ProfileResponse of(User target, User user) {
-        boolean following = user != null && user.followed(target);
-        return ProfileResponse.builder()
-            .username(target.getUsername())
-            .bio(target.getBio())
-            .image(target.getImage())
-            .following(following)
-            .build();
+        return new ProfileResponse(ProfileInfo.of(target, user));
     }
 
-    public static ProfileResponse of(User target, boolean following) {
-        return ProfileResponse.builder()
-            .username(target.getUsername())
-            .bio(target.getBio())
-            .image(target.getImage())
-            .following(following)
-            .build();
+    @Getter
+    @Builder
+    public static class ProfileInfo {
+
+        private final String username;
+        private final String bio;
+        private final String image;
+        private final boolean following;
+
+        public static ProfileInfo of(User target, User user) {
+            boolean following = user != null && user.followed(target);
+            return ProfileInfo.builder()
+                .username(target.getUsername())
+                .bio(target.getBio())
+                .image(target.getImage())
+                .following(following)
+                .build();
+        }
     }
 }
