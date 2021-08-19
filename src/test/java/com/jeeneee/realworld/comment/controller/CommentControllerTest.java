@@ -21,6 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.jeeneee.realworld.ControllerTest;
+import com.jeeneee.realworld.comment.domain.Comment;
 import com.jeeneee.realworld.comment.dto.CommentCreateRequest;
 import com.jeeneee.realworld.comment.dto.MultipleCommentResponse;
 import com.jeeneee.realworld.comment.dto.SingleCommentResponse;
@@ -99,9 +100,8 @@ class CommentControllerTest extends ControllerTest {
     @DisplayName("댓글 전체 조회")
     @Test
     void findAll() throws Exception {
-        List<SingleCommentResponse> list = List.of(SingleCommentResponse.of(COMMENT1, USER1),
-            SingleCommentResponse.of(COMMENT2, USER1));
-        MultipleCommentResponse response = new MultipleCommentResponse(list);
+        List<Comment> list = List.of(COMMENT1, COMMENT2);
+        MultipleCommentResponse response = MultipleCommentResponse.of(list, USER1);
         given(commentService.findAll(any(), any(User.class))).willReturn(response);
 
         ResultActions result = mockMvc.perform(

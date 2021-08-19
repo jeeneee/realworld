@@ -24,12 +24,14 @@ import com.jeeneee.realworld.article.dto.ArticleSearchCondition;
 import com.jeeneee.realworld.article.dto.ArticleUpdateRequest;
 import com.jeeneee.realworld.article.dto.MultipleArticleResponse;
 import com.jeeneee.realworld.article.dto.SingleArticleResponse;
+import com.jeeneee.realworld.article.dto.SingleArticleResponse.ArticleInfo;
 import com.jeeneee.realworld.article.exception.ArticleNotFoundException;
 import com.jeeneee.realworld.article.exception.DuplicateSlugException;
 import com.jeeneee.realworld.common.exception.BadRequestException;
 import com.jeeneee.realworld.tag.domain.Tag;
 import com.jeeneee.realworld.tag.service.TagService;
 import com.jeeneee.realworld.user.domain.User;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -75,6 +77,8 @@ class ArticleServiceTest {
             .description(ARTICLE_DESCRIPTION)
             .body(ARTICLE_BODY)
             .author(author)
+            .createdAt(LocalDateTime.now())
+            .updatedAt(LocalDateTime.now())
             .build();
     }
 
@@ -103,13 +107,14 @@ class ArticleServiceTest {
             .body(ARTICLE_BODY)
             .tagList(tagList)
             .build();
+        tags.forEach(tag -> article.addTag(tag));
         given(articleRepository.existsBySlug(any())).willReturn(false);
         given(tagService.findOrSave(anyList())).willReturn(tags);
         given(articleRepository.save(any(Article.class))).willReturn(article);
 
         SingleArticleResponse response = articleService.save(request, author);
 
-        assertThat(response.getTagList()).containsAll(tagList);
+        assertThat(response.getArticle().getTagList()).containsAll(tagList);
     }
 
     @DisplayName("게시글 수정 - 존재하지 않는 게시글인 경우 예외 발생")
@@ -168,10 +173,10 @@ class ArticleServiceTest {
         given(articleRepository.findBySlug_Value(any())).willReturn(Optional.of(article));
         given(articleRepository.existsBySlug(any(Slug.class))).willReturn(false);
 
-        SingleArticleResponse response = articleService
-            .update(request, article.getSlugValue(), author);
+        ArticleInfo articleInfo = articleService.update(request, article.getSlugValue(), author)
+            .getArticle();
 
-        assertThat(response.getSlug()).isEqualTo("수정된-제목");
+        assertThat(articleInfo.getSlug()).isEqualTo("수정된-제목");
     }
 
     @DisplayName("게시글 삭제 - 존재하지 않는 게시글인 경우 예외 발생")
@@ -259,9 +264,9 @@ class ArticleServiceTest {
     void favorite_Normal_Success() {
         given(articleRepository.findBySlug_Value(any())).willReturn(Optional.of(article));
 
-        SingleArticleResponse response = articleService.favorite(ARTICLE_SLUG, author);
+        ArticleInfo articleInfo = articleService.favorite(ARTICLE_SLUG, author).getArticle();
 
-        assertThat(response.isFavorited()).isTrue();
+        assertThat(articleInfo.isFavorited()).isTrue();
     }
 
     @DisplayName("게시글 찜하기 취소 - 해당 게시글이 존재하지 않으면 예외 발생")
@@ -279,8 +284,8 @@ class ArticleServiceTest {
         article.favorite(author);
         given(articleRepository.findBySlug_Value(any())).willReturn(Optional.of(article));
 
-        SingleArticleResponse response = articleService.unfavorite(ARTICLE_SLUG, author);
+        ArticleInfo articleInfo = articleService.unfavorite(ARTICLE_SLUG, author).getArticle();
 
-        assertThat(response.isFavorited()).isFalse();
+        assertThat(articleInfo.isFavorited()).isFalse();
     }
 }

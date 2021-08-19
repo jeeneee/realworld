@@ -25,6 +25,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.jeeneee.realworld.ControllerTest;
+import com.jeeneee.realworld.article.domain.Article;
 import com.jeeneee.realworld.article.dto.ArticleSearchCondition;
 import com.jeeneee.realworld.article.dto.MultipleArticleResponse;
 import com.jeeneee.realworld.article.dto.SingleArticleResponse;
@@ -163,9 +164,8 @@ class ArticleControllerTest extends ControllerTest {
     @DisplayName("게시글 전체 조회")
     @Test
     void findAll() throws Exception {
-        List<SingleArticleResponse> list = List.of(SingleArticleResponse.of(ARTICLE1, USER1),
-            SingleArticleResponse.of(ARTICLE2, USER1));
-        MultipleArticleResponse response = new MultipleArticleResponse(list);
+        List<Article> list = List.of(ARTICLE1, ARTICLE2);
+        MultipleArticleResponse response = MultipleArticleResponse.of(list, USER1);
         given(articleService.findAll(any(ArticleSearchCondition.class), any(User.class)))
             .willReturn(response);
 
@@ -190,7 +190,8 @@ class ArticleControllerTest extends ControllerTest {
                         parameterWithName("offset").description("offset(0)").optional()
                     ),
                     responseFields(
-                        fieldWithPath("articles").type(JsonFieldType.ARRAY).description("게시글 목록")
+                        fieldWithPath("articles").type(JsonFieldType.ARRAY).description("게시글 목록"),
+                        fieldWithPath("articlesCount").type(JsonFieldType.NUMBER).description("게시글 수")
                     ).andWithPrefix("articles[].", ArticleFieldDescriptor.article)
                         .andWithPrefix("articles[].author.", ProfileFieldDescriptor.profile)
                 )
@@ -201,9 +202,8 @@ class ArticleControllerTest extends ControllerTest {
     @Test
     void feed() throws Exception {
         USER2.follow(USER1);
-        List<SingleArticleResponse> list = List.of(SingleArticleResponse.of(ARTICLE1, USER2),
-            SingleArticleResponse.of(ARTICLE2, USER2));
-        MultipleArticleResponse response = new MultipleArticleResponse(list);
+        List<Article> list = List.of(ARTICLE1, ARTICLE2);
+        MultipleArticleResponse response = MultipleArticleResponse.of(list, USER2);
         given(articleService.findFeedArticles(any(ArticleSearchCondition.class), any(User.class)))
             .willReturn(response);
 
@@ -225,7 +225,8 @@ class ArticleControllerTest extends ControllerTest {
                         parameterWithName("offset").description("offset(0)").optional()
                     ),
                     responseFields(
-                        fieldWithPath("articles").type(JsonFieldType.ARRAY).description("게시글 목록")
+                        fieldWithPath("articles").type(JsonFieldType.ARRAY).description("게시글 목록"),
+                        fieldWithPath("articlesCount").type(JsonFieldType.NUMBER).description("게시글 수")
                     ).andWithPrefix("articles[].", ArticleFieldDescriptor.article)
                         .andWithPrefix("articles[].author.", ProfileFieldDescriptor.profile)
                 )

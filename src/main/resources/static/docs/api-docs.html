@@ -1743,6 +1743,11 @@ Content-Type: application/json;charset=UTF-8
 <td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>article.favoritesCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>article.author</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">작성자 프로필</p></td>
@@ -1804,10 +1809,11 @@ Content-Type: application/json;charset=UTF-8
     "title" : "How to train your dragon",
     "description" : "Ever wonder how?",
     "body" : "You have to believe",
-    "tagList" : [ "reactjs", "angularjs" ],
-    "createdAt" : "2021-08-16T15:10:00",
-    "updatedAt" : "2021-08-16T15:10:00",
+    "tagList" : [ "angularjs", "reactjs" ],
+    "createdAt" : "2021-08-16T15:10:00.000Z",
+    "updatedAt" : "2021-08-16T15:10:00.000Z",
     "favorited" : false,
+    "favoritesCount" : 0,
     "author" : {
       "username" : "username",
       "bio" : "반갑습니다.",
@@ -1950,6 +1956,11 @@ Content-Type: application/json;charset=UTF-8
 <td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>article.favoritesCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>article.author</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">작성자 프로필</p></td>
@@ -2010,9 +2021,10 @@ Content-Type: application/json;charset=UTF-8
     "description" : "Ever wonder why?",
     "body" : "you must believe",
     "tagList" : [ "java", "angularjs" ],
-    "createdAt" : "2021-08-16T15:10:00",
-    "updatedAt" : "2021-08-16T15:10:00",
+    "createdAt" : "2021-08-16T15:10:00.000Z",
+    "updatedAt" : "2021-08-16T15:10:00.000Z",
     "favorited" : false,
+    "favoritesCount" : 0,
     "author" : {
       "username" : "username",
       "bio" : "반갑습니다.",
@@ -2163,6 +2175,11 @@ Authorization: Token abc.def.ghi</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>article.favoritesCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>article.author</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">작성자 프로필</p></td>
@@ -2212,10 +2229,11 @@ Content-Type: application/json;charset=UTF-8
     "title" : "How to train your dragon",
     "description" : "Ever wonder how?",
     "body" : "You have to believe",
-    "tagList" : [ "reactjs", "angularjs" ],
-    "createdAt" : "2021-08-16T15:10:00",
-    "updatedAt" : "2021-08-16T15:10:00",
+    "tagList" : [ "angularjs", "reactjs" ],
+    "createdAt" : "2021-08-16T15:10:00.000Z",
+    "updatedAt" : "2021-08-16T15:10:00.000Z",
     "favorited" : false,
+    "favoritesCount" : 0,
     "author" : {
       "username" : "username",
       "bio" : "반갑습니다.",
@@ -2323,6 +2341,11 @@ Content-Type: application/json;charset=UTF-8
 <td class="tableblock halign-left valign-top"><p class="tableblock">게시글 목록</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articlesCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시글 수</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].slug</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">슬러그</p></td>
@@ -2360,6 +2383,11 @@ Content-Type: application/json;charset=UTF-8
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].favorited</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].favoritesCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
 </tr>
 <tr>
@@ -2412,10 +2440,11 @@ Content-Type: application/json;charset=UTF-8
     "title" : "How to train your dragon",
     "description" : "Ever wonder how?",
     "body" : "You have to believe",
-    "tagList" : [ "reactjs", "angularjs" ],
-    "createdAt" : "2021-08-16T15:10:00",
-    "updatedAt" : "2021-08-16T15:10:00",
+    "tagList" : [ "angularjs", "reactjs" ],
+    "createdAt" : "2021-08-16T15:10:00.000Z",
+    "updatedAt" : "2021-08-16T15:10:00.000Z",
     "favorited" : false,
+    "favoritesCount" : 0,
     "author" : {
       "username" : "username",
       "bio" : "반갑습니다.",
@@ -2428,16 +2457,18 @@ Content-Type: application/json;charset=UTF-8
     "description" : "Ever wonder why?",
     "body" : "you must believe",
     "tagList" : [ "java", "angularjs" ],
-    "createdAt" : "2021-08-16T15:10:00",
-    "updatedAt" : "2021-08-16T15:10:00",
+    "createdAt" : "2021-08-16T15:10:00.000Z",
+    "updatedAt" : "2021-08-16T15:10:00.000Z",
     "favorited" : false,
+    "favoritesCount" : 0,
     "author" : {
       "username" : "username",
       "bio" : "반갑습니다.",
       "image" : "https://avatars.githubusercontent.com/u/23521870?v=4",
       "following" : false
     }
-  } ]
+  } ],
+  "articlesCount" : 2
 }</code></pre>
 </div>
 </div>
@@ -2523,6 +2554,11 @@ Content-Type: application/json;charset=UTF-8
 <td class="tableblock halign-left valign-top"><p class="tableblock">게시글 목록</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articlesCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">게시글 수</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].slug</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">슬러그</p></td>
@@ -2560,6 +2596,11 @@ Content-Type: application/json;charset=UTF-8
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].favorited</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Boolean</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>articles[].favoritesCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
 </tr>
 <tr>
@@ -2612,10 +2653,11 @@ Content-Type: application/json;charset=UTF-8
     "title" : "How to train your dragon",
     "description" : "Ever wonder how?",
     "body" : "You have to believe",
-    "tagList" : [ "reactjs", "angularjs" ],
-    "createdAt" : "2021-08-16T15:10:00",
-    "updatedAt" : "2021-08-16T15:10:00",
+    "tagList" : [ "angularjs", "reactjs" ],
+    "createdAt" : "2021-08-16T15:10:00.000Z",
+    "updatedAt" : "2021-08-16T15:10:00.000Z",
     "favorited" : false,
+    "favoritesCount" : 0,
     "author" : {
       "username" : "username",
       "bio" : "반갑습니다.",
@@ -2628,16 +2670,18 @@ Content-Type: application/json;charset=UTF-8
     "description" : "Ever wonder why?",
     "body" : "you must believe",
     "tagList" : [ "java", "angularjs" ],
-    "createdAt" : "2021-08-16T15:10:00",
-    "updatedAt" : "2021-08-16T15:10:00",
+    "createdAt" : "2021-08-16T15:10:00.000Z",
+    "updatedAt" : "2021-08-16T15:10:00.000Z",
     "favorited" : false,
+    "favoritesCount" : 0,
     "author" : {
       "username" : "username",
       "bio" : "반갑습니다.",
       "image" : "https://avatars.githubusercontent.com/u/23521870?v=4",
       "following" : true
     }
-  } ]
+  } ],
+  "articlesCount" : 2
 }</code></pre>
 </div>
 </div>
@@ -2735,6 +2779,11 @@ Content-Type: application/json;charset=UTF-8
 <td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>article.favoritesCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>article.author</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">작성자 프로필</p></td>
@@ -2784,10 +2833,11 @@ Content-Type: application/json;charset=UTF-8
     "title" : "How to train your dragon",
     "description" : "Ever wonder how?",
     "body" : "You have to believe",
-    "tagList" : [ "reactjs", "angularjs" ],
-    "createdAt" : "2021-08-16T15:10:00",
-    "updatedAt" : "2021-08-16T15:10:00",
+    "tagList" : [ "angularjs", "reactjs" ],
+    "createdAt" : "2021-08-16T15:10:00.000Z",
+    "updatedAt" : "2021-08-16T15:10:00.000Z",
     "favorited" : true,
+    "favoritesCount" : 1,
     "author" : {
       "username" : "username",
       "bio" : "반갑습니다.",
@@ -2892,6 +2942,11 @@ Content-Type: application/json;charset=UTF-8
 <td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
 </tr>
 <tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>article.favoritesCount</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">찜 여부</p></td>
+</tr>
+<tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>article.author</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">작성자 프로필</p></td>
@@ -2941,10 +2996,11 @@ Content-Type: application/json;charset=UTF-8
     "title" : "How to train your dragon",
     "description" : "Ever wonder how?",
     "body" : "You have to believe",
-    "tagList" : [ "reactjs", "angularjs" ],
-    "createdAt" : "2021-08-16T15:10:00",
-    "updatedAt" : "2021-08-16T15:10:00",
+    "tagList" : [ "angularjs", "reactjs" ],
+    "createdAt" : "2021-08-16T15:10:00.000Z",
+    "updatedAt" : "2021-08-16T15:10:00.000Z",
     "favorited" : false,
+    "favoritesCount" : 0,
     "author" : {
       "username" : "username",
       "bio" : "반갑습니다.",
@@ -3118,8 +3174,8 @@ Content-Type: application/json;charset=UTF-8
 {
   "comment" : {
     "id" : 1,
-    "createdAt" : "2021-08-16T15:10:00",
-    "updatedAt" : "2021-08-16T15:10:00",
+    "createdAt" : "2021-08-16T15:10:00.000Z",
+    "updatedAt" : "2021-08-16T15:10:00.000Z",
     "body" : "His name was my name too.",
     "author" : {
       "username" : "username",
@@ -3297,8 +3353,8 @@ Content-Type: application/json;charset=UTF-8
 {
   "comments" : [ {
     "id" : 1,
-    "createdAt" : "2021-08-16T15:10:00",
-    "updatedAt" : "2021-08-16T15:10:00",
+    "createdAt" : "2021-08-16T15:10:00.000Z",
+    "updatedAt" : "2021-08-16T15:10:00.000Z",
     "body" : "His name was my name too.",
     "author" : {
       "username" : "username",
@@ -3308,8 +3364,8 @@ Content-Type: application/json;charset=UTF-8
     }
   }, {
     "id" : 2,
-    "createdAt" : "2021-08-16T15:10:00",
-    "updatedAt" : "2021-08-16T15:10:00",
+    "createdAt" : "2021-08-16T15:10:00.000Z",
+    "updatedAt" : "2021-08-16T15:10:00.000Z",
     "body" : "Her name was my name too.",
     "author" : {
       "username" : "jeeneee",
@@ -3413,7 +3469,7 @@ Content-Type: application/json;charset=UTF-8
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2021-08-18 21:39:08 +0900
+Last updated 2021-08-18 22:40:38 +0900
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

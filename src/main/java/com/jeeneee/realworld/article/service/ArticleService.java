@@ -41,8 +41,7 @@ public class ArticleService {
             List<Tag> tags = tagService.findOrSave(request.getTagList());
             tags.forEach(article::addTag);
         }
-        articleRepository.save(article);
-        return SingleArticleResponse.of(article, author);
+        return SingleArticleResponse.of(articleRepository.save(article), author);
     }
 
     @Transactional
@@ -67,17 +66,13 @@ public class ArticleService {
     }
 
     public MultipleArticleResponse findAll(ArticleSearchCondition condition, User user) {
-        return new MultipleArticleResponse(articleQueryRepository.findAll(condition).stream()
-            .map(article -> SingleArticleResponse.of(article, user))
-            .collect(Collectors.toList()));
+        return MultipleArticleResponse.of(articleQueryRepository.findAll(condition), user);
     }
 
     public MultipleArticleResponse findFeedArticles(ArticleSearchCondition condition, User user) {
         List<Long> followIds = user.getFollows().stream()
             .map(User::getId).collect(Collectors.toList());
-        return new MultipleArticleResponse(articleQueryRepository.findFeedArticles(condition, followIds).stream()
-            .map(article -> SingleArticleResponse.of(article, user))
-            .collect(Collectors.toList()));
+        return MultipleArticleResponse.of(articleQueryRepository.findFeedArticles(condition, followIds), user);
     }
 
     @Transactional

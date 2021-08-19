@@ -1,6 +1,9 @@
 package com.jeeneee.realworld.user.dto;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import lombok.AccessLevel;
@@ -14,7 +17,8 @@ import org.hibernate.validator.constraints.Length;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
-@JsonRootName(value = "user")
+@JsonTypeInfo(include = As.WRAPPER_OBJECT, use = Id.NAME)
+@JsonTypeName("user")
 public class LoginRequest {
 
     @NotBlank(message = "email cannot be empty.")

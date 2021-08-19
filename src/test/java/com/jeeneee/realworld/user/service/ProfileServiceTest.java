@@ -10,7 +10,7 @@ import static org.mockito.BDDMockito.given;
 
 import com.jeeneee.realworld.user.domain.User;
 import com.jeeneee.realworld.user.domain.UserRepository;
-import com.jeeneee.realworld.user.dto.ProfileResponse;
+import com.jeeneee.realworld.user.dto.ProfileResponse.ProfileInfo;
 import com.jeeneee.realworld.user.exception.UserNotFoundException;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,9 +60,9 @@ class ProfileServiceTest {
     void find_Logout_FollowingFalse() {
         given(userRepository.findByUsername(any())).willReturn(Optional.of(target));
 
-        ProfileResponse response = profileService.find(target.getUsername(), null);
+        ProfileInfo profile = profileService.find(target.getUsername(), null).getProfile();
 
-        assertThat(response.isFollowing()).isFalse();
+        assertThat(profile.isFollowing()).isFalse();
     }
 
     @DisplayName("팔로잉한 회원 조회")
@@ -71,12 +71,12 @@ class ProfileServiceTest {
         user.follow(target);
         given(userRepository.findByUsername(any())).willReturn(Optional.of(target));
 
-        ProfileResponse response = profileService.find(target.getUsername(), user);
+        ProfileInfo profile = profileService.find(target.getUsername(), user).getProfile();
 
-        assertThat(response.isFollowing()).isTrue();
-        assertThat(response.getUsername()).isEqualTo(target.getUsername());
-        assertThat(response.getBio()).isEqualTo(target.getBio());
-        assertThat(response.getImage()).isEqualTo(target.getImage());
+        assertThat(profile.isFollowing()).isTrue();
+        assertThat(profile.getUsername()).isEqualTo(target.getUsername());
+        assertThat(profile.getBio()).isEqualTo(target.getBio());
+        assertThat(profile.getImage()).isEqualTo(target.getImage());
     }
 
     @DisplayName("팔로잉하지 않은 회원 조회")
@@ -84,12 +84,12 @@ class ProfileServiceTest {
     void find_NotFollowingUser_FollowingFalse() {
         given(userRepository.findByUsername(any())).willReturn(Optional.of(target));
 
-        ProfileResponse response = profileService.find(target.getUsername(), user);
+        ProfileInfo profile = profileService.find(target.getUsername(), user).getProfile();
 
-        assertThat(response.isFollowing()).isFalse();
-        assertThat(response.getUsername()).isEqualTo(target.getUsername());
-        assertThat(response.getBio()).isEqualTo(target.getBio());
-        assertThat(response.getImage()).isEqualTo(target.getImage());
+        assertThat(profile.isFollowing()).isFalse();
+        assertThat(profile.getUsername()).isEqualTo(target.getUsername());
+        assertThat(profile.getBio()).isEqualTo(target.getBio());
+        assertThat(profile.getImage()).isEqualTo(target.getImage());
     }
 
     @DisplayName("팔로우")
@@ -97,12 +97,12 @@ class ProfileServiceTest {
     void follow_Normal_Success() {
         given(userRepository.findByUsername(any())).willReturn(Optional.of(target));
 
-        ProfileResponse response = profileService.follow(target.getUsername(), user);
+        ProfileInfo profile = profileService.follow(target.getUsername(), user).getProfile();
 
-        assertThat(response.isFollowing()).isTrue();
-        assertThat(response.getUsername()).isEqualTo(target.getUsername());
-        assertThat(response.getBio()).isEqualTo(target.getBio());
-        assertThat(response.getImage()).isEqualTo(target.getImage());
+        assertThat(profile.isFollowing()).isTrue();
+        assertThat(profile.getUsername()).isEqualTo(target.getUsername());
+        assertThat(profile.getBio()).isEqualTo(target.getBio());
+        assertThat(profile.getImage()).isEqualTo(target.getImage());
     }
 
     @DisplayName("언팔로우")
@@ -111,11 +111,11 @@ class ProfileServiceTest {
         user.follow(target);
         given(userRepository.findByUsername(any())).willReturn(Optional.of(target));
 
-        ProfileResponse response = profileService.unfollow(target.getUsername(), user);
+        ProfileInfo profile = profileService.unfollow(target.getUsername(), user).getProfile();
 
-        assertThat(response.isFollowing()).isFalse();
-        assertThat(response.getUsername()).isEqualTo(target.getUsername());
-        assertThat(response.getBio()).isEqualTo(target.getBio());
-        assertThat(response.getImage()).isEqualTo(target.getImage());
+        assertThat(profile.isFollowing()).isFalse();
+        assertThat(profile.getUsername()).isEqualTo(target.getUsername());
+        assertThat(profile.getBio()).isEqualTo(target.getBio());
+        assertThat(profile.getImage()).isEqualTo(target.getImage());
     }
 }

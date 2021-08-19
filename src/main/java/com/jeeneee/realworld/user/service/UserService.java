@@ -46,8 +46,12 @@ public class UserService {
 
     @Transactional
     public UserResponse update(UserUpdateRequest request, User user) {
-        Optional.ofNullable(request.getUsername()).ifPresent(this::validateUsername);
-        Optional.ofNullable(request.getEmail()).ifPresent(this::validateEmail);
+        if (request.getUsername() != null && !request.getUsername().equals(user.getUsername())) {
+            validateUsername(request.getUsername());
+        }
+        if (request.getEmail() != null && !request.getEmail().equals(user.getEmail())) {
+            validateEmail(request.getEmail());
+        }
         Optional.ofNullable(request.getPassword()).ifPresent(
             password -> request.setPassword(passwordEncoder.encode(request.getPassword())));
 

@@ -10,7 +10,6 @@ import com.jeeneee.realworld.comment.dto.SingleCommentResponse;
 import com.jeeneee.realworld.comment.exception.CommentNotFoundException;
 import com.jeeneee.realworld.common.exception.BadRequestException;
 import com.jeeneee.realworld.user.domain.User;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,10 +37,8 @@ public class CommentService {
     }
 
     public MultipleCommentResponse findAll(String slug, User user) {
-        return new MultipleCommentResponse(
-            commentRepository.findAllByArticle_Slug_Value(slug).stream()
-                .map(comment -> SingleCommentResponse.of(comment, user))
-                .collect(Collectors.toList()));
+        return MultipleCommentResponse
+            .of(commentRepository.findAllByArticle_Slug_Value(slug), user);
     }
 
     private Comment getComment(Long commentId) {

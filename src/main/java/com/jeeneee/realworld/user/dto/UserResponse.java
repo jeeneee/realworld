@@ -1,6 +1,9 @@
 package com.jeeneee.realworld.user.dto;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.jeeneee.realworld.user.domain.User;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -12,7 +15,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-@JsonRootName("user")
+@JsonTypeInfo(include = As.WRAPPER_OBJECT, use = Id.NAME)
+@JsonTypeName("user")
 public class UserResponse {
 
     private String email;

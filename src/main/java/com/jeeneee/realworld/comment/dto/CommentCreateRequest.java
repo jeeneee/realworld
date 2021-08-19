@@ -1,6 +1,9 @@
 package com.jeeneee.realworld.comment.dto;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.jeeneee.realworld.article.domain.Article;
 import com.jeeneee.realworld.comment.domain.Comment;
 import com.jeeneee.realworld.user.domain.User;
@@ -13,7 +16,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
-@JsonRootName("comment")
+@JsonTypeInfo(include = As.WRAPPER_OBJECT, use = Id.NAME)
+@JsonTypeName("comment")
 public class CommentCreateRequest {
 
     @NotBlank(message = "body cannot be empty")

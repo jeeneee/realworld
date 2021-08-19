@@ -1,6 +1,9 @@
 package com.jeeneee.realworld.article.dto;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.jeeneee.realworld.article.domain.Article;
 import com.jeeneee.realworld.user.domain.User;
 import java.util.List;
@@ -15,7 +18,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-@JsonRootName("article")
+@JsonTypeInfo(include = As.WRAPPER_OBJECT, use = Id.NAME)
+@JsonTypeName("article")
 public class ArticleCreateRequest {
 
     @NotBlank(message = "title cannot be empty")
