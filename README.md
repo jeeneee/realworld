@@ -42,7 +42,7 @@ To generate REST API Documentation, execute:
 $ ./gradlew bootJar
 ```
 
-For more details, see [`api-docs.html`](src\main\resources\static\docs\api-docs.html).
+For more details, see [`api-docs.html`](src/main/resources/static/docs/api-docs.html).
 
 # Diagram
 
