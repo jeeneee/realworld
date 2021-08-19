@@ -12,6 +12,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.sonarqube'
 apply plugin: 'jacoco'
 apply plugin: 'org.asciidoctor.jvm.convert'
+apply plugin: 'application'
 
 group = 'com.jeeneee'
 version = '0.0.1'
