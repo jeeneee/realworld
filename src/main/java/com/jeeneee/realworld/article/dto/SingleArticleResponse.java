@@ -27,20 +27,22 @@ public class SingleArticleResponse {
 
     @Getter
     @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class ArticleInfo {
 
-        private final String slug;
-        private final String title;
-        private final String description;
-        private final String body;
-        private final String[] tagList;
+        private String slug;
+        private String title;
+        private String description;
+        private String body;
+        private String[] tagList;
         @JsonFormat(shape = STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "Asia/Seoul")
-        private final LocalDateTime createdAt;
+        private LocalDateTime createdAt;
         @JsonFormat(shape = STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "Asia/Seoul")
-        private final LocalDateTime updatedAt;
-        private final boolean favorited;
-        private final int favoritesCount;
-        private final ProfileInfo author;
+        private LocalDateTime updatedAt;
+        private boolean favorited;
+        private int favoritesCount;
+        private ProfileInfo author;
 
         public static ArticleInfo of(Article article, User user) {
             return ArticleInfo.builder()
