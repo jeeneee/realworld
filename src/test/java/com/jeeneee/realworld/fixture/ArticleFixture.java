@@ -31,6 +31,15 @@ public class ArticleFixture {
         .updatedAt(LocalDateTime.of(2021, 8, 16, 15, 10))
         .build();
 
+    public static Article ARTICLE3 = Article.builder()
+        .title("test article")
+        .description("Ever wonder why?")
+        .body("you must believe")
+        .author(USER1)
+        .createdAt(LocalDateTime.of(2021, 8, 16, 15, 10))
+        .updatedAt(LocalDateTime.of(2021, 8, 16, 15, 10))
+        .build();
+
     static {
         ARTICLE1.addTag(TAG1);
         ARTICLE1.addTag(TAG2);

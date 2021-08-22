@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.jeeneee.realworld.ControllerTest;
+import com.jeeneee.realworld.tag.controller.TagController;
 import com.jeeneee.realworld.tag.dto.MultipleTagResponse;
 import com.jeeneee.realworld.tag.service.TagService;
 import java.util.List;

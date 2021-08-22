@@ -1,4 +1,4 @@
-package com.jeeneee.realworld.tag;
+package com.jeeneee.realworld.tag.controller;
 
 import com.jeeneee.realworld.tag.dto.MultipleTagResponse;
 import com.jeeneee.realworld.tag.service.TagService;

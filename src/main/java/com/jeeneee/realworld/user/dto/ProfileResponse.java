@@ -8,8 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class ProfileResponse {
 
     private ProfileInfo profile;
@@ -20,12 +20,14 @@ public class ProfileResponse {
 
     @Getter
     @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class ProfileInfo {
 
-        private final String username;
-        private final String bio;
-        private final String image;
-        private final boolean following;
+        private String username;
+        private String bio;
+        private String image;
+        private boolean following;
 
         public static ProfileInfo of(User target, User user) {
             boolean following = user != null && user.followed(target);

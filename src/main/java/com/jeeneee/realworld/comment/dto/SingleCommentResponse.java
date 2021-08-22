@@ -26,15 +26,17 @@ public class SingleCommentResponse {
 
     @Getter
     @Builder
+    @NoArgsConstructor(access = AccessLevel.PRIVATE)
+    @AllArgsConstructor(access = AccessLevel.PRIVATE)
     public static class CommentInfo {
 
-        private final Long id;
+        private Long id;
         @JsonFormat(shape = STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "Asia/Seoul")
-        private final LocalDateTime createdAt;
+        private LocalDateTime createdAt;
         @JsonFormat(shape = STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", timezone = "Asia/Seoul")
-        private final LocalDateTime updatedAt;
-        private final String body;
-        private final ProfileInfo author;
+        private LocalDateTime updatedAt;
+        private String body;
+        private ProfileInfo author;
 
         public static CommentInfo of(Comment comment, User user) {
             return CommentInfo.builder()
